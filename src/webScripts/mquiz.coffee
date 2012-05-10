@@ -2,8 +2,7 @@ include 'moustache.js'
 
 quiz = retrieveData 'quiz', ['title', 'doneText', 'showAnswers', 'questionsJSON']
 
-render = ->
-	userData = (retrieveData request.user, ['quizData']).quizData
+render = (userData) ->
 	isAnswered = false
 
 	# has this quiz been answered?
@@ -77,11 +76,17 @@ render = ->
 	return marks
 	
 if quiz.questionsJSON
-	quiz.questions = JSON.parse( quiz.questionsJSON )
 	
-	if request.method is 'POST'
-		storeData request.user, { quizData: request.data }
-		marks = render( )
+	user = 'test'
+	if request.user
+		user = request.user
+	
+	quiz.questions = JSON.parse( quiz.questionsJSON )
+	userData = (retrieveData user, ['quizData']).quizData
+	
+	if request.method is 'POST' and not userData
+		storeData user, { quizData: request.data }
+		marks = render( request.data )
 		
 		taskMarksUpdate = { }
 
@@ -89,7 +94,7 @@ if quiz.questionsJSON
 			mark: marks
 			completed: true
 		
-		#setMarks( taskMarksUpdate )
+		#OpenLearning.setMarks( taskMarksUpdate )
 	else
 		render( )
 else
