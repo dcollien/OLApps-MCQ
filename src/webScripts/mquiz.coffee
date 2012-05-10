@@ -18,7 +18,10 @@ render = ->
 	marks = 0
 	for questionData in quiz.questions
 
-		isCorrect = (userData['question' + questionNumber] is questionData.correct)
+		isCorrect = false
+		
+		if isAnswered:
+			isCorrect = (userData['question' + questionNumber] is questionData.correct)
 
 		marks += 1 if isCorrect
 
