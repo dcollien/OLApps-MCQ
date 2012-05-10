@@ -49,8 +49,9 @@ render = ->
 					text: questionData.text
 					correct: isCorrect
 					answers: answers
-
-				questionNumber += 1
+			
+			
+			questionNumber += 1
 
 	totalQuestions = questionNumber
 
