@@ -70,6 +70,7 @@ render = ->
 		resultText: resultText
 		quizResult: quizResult
 		doneText: quiz.doneText
+		csrf_token: request.csrfFormInput
 
 	response.writeData Mustache.render( template, view )
 
