@@ -26,9 +26,14 @@ render = ->
 		
 		if questionData.answers
 			for answerData in questionData.answers
+				
+				selected = false
+				if isAnswered
+					selected = (userData['question' + questionNumber] is answerData.value)
+				
 				answer = 
 					text: answerData.text
-					selected: (userData['question' + questionNumber] is answerData.value) if isAnswered else false
+					selected: selected
 					showAsCorrect: (answerData.value is questionData.correct) if isAnswered else false
 
 				answers.push answer
