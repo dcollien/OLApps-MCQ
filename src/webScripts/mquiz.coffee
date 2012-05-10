@@ -20,7 +20,7 @@ render = ->
 
 		isCorrect = false
 		
-		if isAnswered:
+		if isAnswered
 			isCorrect = (userData['question' + questionNumber] is questionData.correct)
 
 		marks += 1 if isCorrect
