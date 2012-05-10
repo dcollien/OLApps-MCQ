@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ quizTitle }}</title>
+    <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
+    <script src="/common/jquery.min.js"></script>
+  </head>
+  <body>
+    <form method="post" action="quiz">
+      {{ csrf_token }}
+    <table class="table table-striped">
+      <tbody>
+      {{ quizRows }}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td style="text-align: right">{{ resultText }}</td>
+          <td>{{ quizResult }}</td>
+        </tr>
+      </tfoot>
+    </table>
+      {{ quizFooter }}
+    </form>
+  </body>
+</html>

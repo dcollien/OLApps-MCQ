@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Quiz Admin</title>
+    <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
+    <script src="/common/jquery.min.js"></script>
+    <style>
+      .box-full {
+      	box-sizing: border-box;
+	    -webkit-box-sizing:border-box;
+	    -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	    width: 100%;
+      }
+    </style>
+    <script>
+      $( function( ) {
+        $.getJSON( 'loadAdmin', function( data ) {
+          $('#title').val( data.title );
+          $('#doneText').val( data.doneText );
+          $('#showAnswers').prop( "checked", data.showAnswers );
+          $('#questionsJSON').val( JSON.stringify( data.questions, undefined, 2 ) );
+        } );
+      } );
+    </script>
+  </head>
+  <body>
+   <div class="container">
+    <form method="post" action="saveAdmin" class="form-horizontal">
+      
+      <fieldset>
+        {{ csrf_token }}
+        
+        <legend>Quiz Set-up</legend>
+        <div class="control-group">
+          <label class="control-label" for="title">Quiz title</label>
+          <div class="controls">
+            <input type="text" class="input-large" name="title" id="title">
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label class="control-label" for="doneText">Submission button text</label>
+          <div class="controls">
+            <input type="text" class="input-large" name="doneText" id="doneText" value="I'm Done">
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label class="control-label" for="doneText">Show answers on completion</label>
+          <div class="controls">
+            <input type="checkbox" class="input-xlarge" name="showAnswers" id="showAnswers" checked="checked">
+          </div>
+        </div>
+        
+        <legend>Questions</legend>
+        <div id="questions">
+          <!-- TODO: Make GUI -->
+          <textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON"></textarea>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save Quiz</button>
+        </div>
+      </fieldset>
+    </form>
+   </div>
+  </body>
+</html>
