@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ quizTitle }}</title>
+    <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
+    <script src="/common/jquery.min.js"></script>
+  </head>
+  <body>
+    <form method="post" action="quiz">
+      {{&csrf_token}}
+    <table class="table table-striped">
+      <tbody>
+		{{#questions}}
+      	<tr>
+			<th> {{number}} </th>
+			<td> {{text}} </td>
+			<td>
+				{{#answered}}
+					{{#correct}}
+						<span class="label label-success">Correct</span>
+					{{/correct}}
+				
+					{{^correct}}
+						<span class="label label-important">Incorrect</span>
+					{{/correct}}
+				{{/answered}}
+				
+				{{#answers}}
+					<label class="radio" style="margin-top: 4px">
+						<input type="radio" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#answered}}disabled="disabled"{{/answered}}>
+						{{#showAsCorrect}}<b {{#correct}}style="color: #080"{{/correct}}>{{text}}</b>{{/showAsCorrect}}
+						{{^showAsCorrect}}{{text}}{{/showAsCorrect}}
+					</label>
+				{{/answers}}
+			</td>
+		</tr>
+		{{/questions}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td style="text-align: right">{{resultText}}</td>
+          <td>{{quizResult}}</td>
+        </tr>
+      </tfoot>
+    </table>
+      {{^answered}}<center><button type="submit" class="btn btn-primary">{{doneText}}</button></center>{{/answered}}
+    </form>
+  </body>
+</html>

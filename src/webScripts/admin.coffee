@@ -1,8 +1,7 @@
-csrfToken = '<input type="hidden" name="csrfmiddlewaretoken" value="' + request.csrfToken + '">'
+include 'moustache.js'
 
-html = include 'adminTemplate.html'
+template = include 'adminTemplate.html'
 
+view = csrf_token: request.csrfFormInput
 
-html = html.replace '{{ csrf_token }}', csrfToken
-
-response.writeData html
+response.writeData Mustache.render( template, view )

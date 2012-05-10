@@ -5,7 +5,7 @@ renderQuiz = (postAnswers=null) ->
   csrfToken = '<input type="hidden" name="csrfmiddlewaretoken" value="' + request.csrfToken + '">'
     
   renderQuestion = ( number, question ) ->
-    html = "<tr><th>" + number + "</th><td>" + question.text + "</td><td>"
+    html = "<tr><th>" + number + "</th><td>" + response.escape( question.text ) + "</td><td>"
     
     if postAnswers
       if postAnswers['question' + number] is question.correct
@@ -31,7 +31,7 @@ renderQuiz = (postAnswers=null) ->
       
       html += '<label class="radio" style="margin-top: 4px">'
       html += '<input type="radio" name="question' + number + '" value="' + response.escape( answer.value ) + '" ' + checked + ' ' + disabled + '>'
-      html += answerText
+      html += response.escape( answerText )
       html += '</label>'
     
     html += '</td></tr>'
@@ -64,17 +64,17 @@ renderQuiz = (postAnswers=null) ->
     resultText = 'Total Questions:'
     quizResult = quiz.questions.length
   
-  html = html.replace '{{ quizTitle }}', quiz.title
+  html = html.replace '{{ quizTitle }}', response.escape( quiz.title )
   html = html.replace '{{ csrf_token }}', csrfToken
   html = html.replace '{{ quizRows }}', quizRows
-  html = html.replace '{{ resultText }}', resultText
-  html = html.replace '{{ quizResult }}', quizResult
+  html = html.replace '{{ resultText }}', response.escape( resultText )
+  html = html.replace '{{ quizResult }}', response.escape( quizResult )
   
   if not postAnswers
     html = html.replace '{{ quizFooter }}', footer
   else
     if quiz.thankyou
-      html = html.replace '{{ quizFooter }}', quiz.thankyou
+      html = html.replace '{{ quizFooter }}', response.escape( quiz.thankyou )
     else
       html = html.replace '{{ quizFooter }}', ''
   
