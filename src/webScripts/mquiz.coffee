@@ -96,6 +96,6 @@ if quiz.questionsJSON
 		
 		#OpenLearning.setMarks( taskMarksUpdate )
 	else
-		render( )
+		render( userData )
 else
 	response.writeText "Quiz has not been set up."
