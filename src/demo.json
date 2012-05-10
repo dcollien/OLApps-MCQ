@@ -1,0 +1,56 @@
+[
+  {
+    "text": "Pick the best answer.",
+    "correct": "C",
+    "answers": [
+      {
+        "text": "This answer!",
+        "value": "A"
+      },
+      {
+        "text": "No, this answer!",
+        "value": "B"
+      },
+      {
+        "text": "All of the above",
+        "value": "C"
+      }
+    ]
+  },
+  {
+    "text": "Which is the wrong answer?",
+    "correct": "B",
+    "answers": [
+      {
+        "text": "This answer!",
+        "value": "A"
+      },
+      {
+        "text": "No, this answer!",
+        "value": "B"
+      },
+      {
+        "text": "All of the above",
+        "value": "C"
+      }
+    ]
+  },
+  {
+    "text": "Which will you choose?",
+    "correct": "C",
+    "answers": [
+      {
+        "text": "This one?",
+        "value": "A"
+      },
+      {
+        "text": "This one?",
+        "value": "B"
+      },
+      {
+        "text": "Or THIS one?",
+        "value": "C"
+      }
+    ]
+  }
+]

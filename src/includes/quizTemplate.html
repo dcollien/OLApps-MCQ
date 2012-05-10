@@ -6,21 +6,45 @@
     <script src="/common/jquery.min.js"></script>
   </head>
   <body>
-    <form method="post" action="quiz">
-      {{ csrf_token }}
+    <form method="post" action="?">
+      {{&csrf_token}}
     <table class="table table-striped">
       <tbody>
-      {{ quizRows }}
+		{{#questions}}
+      	<tr>
+			<th> {{number}} </th>
+			<td> {{text}} </td>
+			<td>
+				{{#answered}}
+					{{#correct}}
+						<span class="label label-success">Correct</span>
+					{{/correct}}
+				
+					{{^correct}}
+						<span class="label label-important">Incorrect</span>
+					{{/correct}}
+				{{/answered}}
+				
+				{{#answers}}
+					<label class="radio" style="margin-top: 4px">
+						<input type="radio" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#answered}}disabled="disabled"{{/answered}}>
+						{{#showAsCorrect}}<b {{#correct}}style="color: #080"{{/correct}}>{{text}}</b>{{/showAsCorrect}}
+						{{^showAsCorrect}}{{text}}{{/showAsCorrect}}
+					</label>
+				{{/answers}}
+			</td>
+		</tr>
+		{{/questions}}
       </tbody>
       <tfoot>
         <tr>
           <td></td>
-          <td style="text-align: right">{{ resultText }}</td>
-          <td>{{ quizResult }}</td>
+          <td style="text-align: right">{{resultText}}</td>
+          <td>{{quizResult}}</td>
         </tr>
       </tfoot>
     </table>
-      {{ quizFooter }}
+      {{^answered}}<center><button type="submit" class="btn btn-primary">{{doneText}}</button></center>{{/answered}}
     </form>
   </body>
 </html>
