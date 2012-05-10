@@ -29,7 +29,7 @@
     <form method="post" action="saveAdmin" class="form-horizontal">
       
       <fieldset>
-        {{&csrf_token}}
+        {{ csrf_token }}
         
         <legend>Quiz Set-up</legend>
         <div class="control-group">
@@ -56,6 +56,7 @@
         <legend>Questions</legend>
         <div id="questions">
           <!-- TODO: Make GUI -->
+          JSON Data for Questions:
           <textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON"></textarea>
         </div>
         
