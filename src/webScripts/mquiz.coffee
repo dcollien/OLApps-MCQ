@@ -2,12 +2,6 @@ include 'moustache.js'
 
 quiz = retrieveData 'quiz', ['title', 'doneText', 'showAnswers', 'questionsJSON']
 
-if quiz.questions
-	quiz.questions = JSON.parse( quiz.questionsJSON )
-	render( )
-else
-	response.writeText "Quiz has not been set up."
-
 render = ->
 	userData = (retrieveData request.user, ['quizData']).quizData
 	isAnswered = false
@@ -64,3 +58,10 @@ render = ->
 		doneText: quiz.doneText
 
 	response.writeData Mustache.render( template, view )
+
+
+if quiz.questionsJSON
+	quiz.questions = JSON.parse( quiz.questionsJSON )
+	render( )
+else
+	response.writeText "Quiz has not been set up."
