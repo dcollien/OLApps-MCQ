@@ -73,10 +73,24 @@ render = ->
 		csrf_token: request.csrfFormInput
 
 	response.writeData Mustache.render( template, view )
-
-
+	
+	return marks
+	
 if quiz.questionsJSON
 	quiz.questions = JSON.parse( quiz.questionsJSON )
-	render( )
+	
+	if request.method is 'POST'
+		storeData request.user, { quizData: request.data }
+		marks = render( )
+		
+		taskMarksUpdate = { }
+
+		taskMarksUpdate[request.user] =
+			mark: marks
+			completed: true
+		
+		#setMarks( taskMarksUpdate )
+	else
+		render( )
 else
 	response.writeText "Quiz has not been set up."
