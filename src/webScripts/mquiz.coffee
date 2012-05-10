@@ -32,13 +32,15 @@ render = ->
 			for answerData in questionData.answers
 				
 				selected = false
+				showAsCorrect = false
 				if isAnswered
 					selected = (userData['question' + questionNumber] is answerData.value)
+					showAsCorrect = (answerData.value is questionData.correct)
 				
 				answer = 
 					text: answerData.text
 					selected: selected
-					showAsCorrect: (answerData.value is questionData.correct) if isAnswered else false
+					showAsCorrect: showAsCorrect
 
 				answers.push answer
 			
