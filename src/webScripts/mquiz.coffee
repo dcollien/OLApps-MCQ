@@ -23,7 +23,8 @@ render = ->
 		if isAnswered
 			isCorrect = (userData['question' + questionNumber] is questionData.correct)
 
-		marks += 1 if isCorrect
+		if isCorrect
+			marks += 1
 
 		answers = []
 		
