@@ -40,6 +40,7 @@ render = (userData) ->
 					text: answerData.text
 					selected: selected
 					showAsCorrect: showAsCorrect
+					value: answerData.value
 
 				answers.push answer
 
