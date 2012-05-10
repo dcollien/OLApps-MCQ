@@ -1,7 +1,11 @@
 include 'moustache.js'
 
 quiz = retrieveData 'quiz', ['title', 'doneText', 'showAnswers', 'questionsJSON']
-quiz.questions = JSON.parse( quiz.questionsJSON )
+
+if quiz.questions
+	quiz.questions = JSON.parse( quiz.questionsJSON )
+else
+	response.writeText "Quiz has not been set up."
 
 userData = (retrieveData request.user, ['quizData']).quizData
 isAnswered = false
