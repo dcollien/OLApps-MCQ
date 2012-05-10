@@ -43,15 +43,17 @@ render = ->
 					showAsCorrect: showAsCorrect
 
 				answers.push answer
+
 			
-				question =
-					number: questionNumber
-					text: questionData.text
-					correct: isCorrect
-					answers: answers
+		question =
+			number: questionNumber
+			text: questionData.text
+			correct: isCorrect
+			answers: answers
 			
-			
-			questionNumber += 1
+		questions.push question
+		questionNumber += 1
+		
 
 	totalQuestions = questionNumber
 
