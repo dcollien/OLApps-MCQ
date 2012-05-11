@@ -4,6 +4,7 @@
     <title>{{ quizTitle }}</title>
     <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
     <script src="/common/jquery.min.js"></script>
+	<script src="/common/app.js"></script>
   </head>
   <body>
     <form method="post" action="?">
@@ -27,7 +28,7 @@
 				
 				{{#answers}}
 					<label class="radio" style="margin-top: 4px">
-						<input type="radio" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#answered}}disabled="disabled"{{/answered}}>
+						<input type="radio" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#disabled}}disabled="disabled"{{/disabled}}>
 						{{#showAsCorrect}}<b {{#correct}}style="color: #080"{{/correct}}>{{text}}</b>{{/showAsCorrect}}
 						{{^showAsCorrect}}{{text}}{{/showAsCorrect}}
 					</label>
@@ -44,7 +45,7 @@
         </tr>
       </tfoot>
     </table>
-      {{^answered}}<center><button type="submit" class="btn btn-primary">{{doneText}}</button></center>{{/answered}}
+      {{^disabled}}<center><button type="submit" class="btn btn-primary">{{doneText}}</button></center>{{/disabled}}
     </form>
   </body>
 </html>

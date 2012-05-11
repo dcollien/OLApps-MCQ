@@ -4,6 +4,7 @@
     <title>Quiz Admin</title>
     <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
     <script src="/common/jquery.min.js"></script>
+	<script src="/common/app.js"></script>
     <style>
       .box-full {
       	box-sizing: border-box;
@@ -20,6 +21,7 @@
           $('#doneText').val( data.doneText );
           $('#showAnswers').prop( "checked", data.showAnswers );
           $('#questionsJSON').val( JSON.stringify( data.questions, undefined, 2 ) );
+          $('#allowMultipleSubmission').prop( "checked", data.allowMultipleSubmission );
         } );
       } );
     </script>
@@ -49,7 +51,14 @@
         <div class="control-group">
           <label class="control-label" for="doneText">Show answers on completion</label>
           <div class="controls">
-            <input type="checkbox" class="input-xlarge" name="showAnswers" id="showAnswers" checked="checked">
+            <input type="checkbox" name="showAnswers" id="showAnswers" checked="checked">
+          </div>
+        </div>
+
+		<div class="control-group">
+          <label class="control-label" for="doneText">Allow Multiple Submission</label>
+          <div class="controls">
+            <input type="checkbox" name="allowMultipleSubmission" id="allowMultipleSubmission">
           </div>
         </div>
         
