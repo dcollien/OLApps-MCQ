@@ -16,7 +16,7 @@
     </style>
     <script>
       $( function( ) {
-        $.getJSON( 'loadAdmin', function( data ) {
+        $.getJSON( './loadAdmin', function( data ) {
           if ( data.error ) {
             $('body').text( data.error );
           }	else {
