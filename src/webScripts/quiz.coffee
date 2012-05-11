@@ -30,6 +30,9 @@ renderAndMark = (userData) ->
 	# numbering starts at 1
 	questionNumber = 1
 	
+	# is submission disabled
+	isDisabled = userData and (not userData.canSubmit)
+	
 	# we'll collect marks as we go
 	marks = 0
 	for questionData in quiz.questions
@@ -54,8 +57,8 @@ renderAndMark = (userData) ->
 				if isAnswered
 					# if this quiz has been answered, figure out if this answer was selected 
 					selected = (userData['question' + questionNumber] is answerData.value)
-					# highlight this if it's the correct answer to the question
-					showAsCorrect = (answerData.value is questionData.correct)
+					# highlight this if it's the correct answer to the question (and the user can't submit)
+					showAsCorrect = (answerData.value is questionData.correct) and isDisabled
 				
 				# this is the data we need to render the answer
 				answer = 
@@ -87,7 +90,6 @@ renderAndMark = (userData) ->
 		resultText = 'Total Questions:'
 		quizResult = totalQuestions
 	
-	isDisabled = userData and (not userData.canSubmit)
 	
 	view = 
 		answered: isAnswered

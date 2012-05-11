@@ -17,11 +17,15 @@
     <script>
       $( function( ) {
         $.getJSON( 'loadAdmin', function( data ) {
-          $('#title').val( data.title );
-          $('#doneText').val( data.doneText );
-          $('#showAnswers').prop( "checked", data.showAnswers );
-          $('#questionsJSON').val( JSON.stringify( data.questions, undefined, 2 ) );
-          $('#allowMultipleSubmission').prop( "checked", data.allowMultipleSubmission );
+          if ( data.error ) {
+            $('body').text( data.error );
+          }	else {
+            $('#title').val( data.title );
+            $('#doneText').val( data.doneText );
+            $('#showAnswers').prop( "checked", data.showAnswers );
+            $('#questionsJSON').val( JSON.stringify( data.questions, undefined, 2 ) );
+            $('#allowMultipleSubmission').prop( "checked", data.allowMultipleSubmission );
+          }
         } );
       } );
     </script>
