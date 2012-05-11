@@ -86,10 +86,12 @@ renderAndMark = (userData) ->
 	else
 		resultText = 'Total Questions:'
 		quizResult = totalQuestions
-		
+	
+	isDisabled = userData and (not userData.canSubmit)
+	
 	view = 
 		answered: isAnswered
-		disabled: userData.canSubmit
+		disabled: isDisabled
 		questions: questions
 		resultText: resultText
 		quizResult: quizResult
@@ -106,7 +108,7 @@ if hasQuizData
 	canSubmit = quiz.allowMultipleSubmission or not userData
 	
 	if request.method is 'POST' and canSubmit
-		# first submission
+		# submission
 		
 		quizData = request.data
 		quizData.canSubmit = canSubmit
@@ -120,7 +122,7 @@ if hasQuizData
 			mark: marks
 			completed: true
 		
-		#OpenLearning.setMarks( taskMarksUpdate )
+		OpenLearning.setMarks( taskMarksUpdate )
 	else
 		quizData = userData
 		
