@@ -14,6 +14,39 @@
 				$.spin.spinUpImage   = '{{ spin_up }}',
 				$.spin.spinDownImage = '{{ spin_down }}',
 				$('.spinner').spin( { max: 10, min: 2 } );
+				
+				var questionsJSON = {{ questionsJSON }};
+				var questions = JSON.parse( questionsJSON );
+				
+				// TODO GUI
+				console.log( questions );
+				
+				/*
+				JSON format:
+				questions = [
+				  {
+				    "text": "Question Text",
+				    "correct": "C",
+				    "answers": [
+				      {
+				        "text": "Answer Text",
+				        "value": "A"
+				      },
+				      {
+				        "text": "Answer Text",
+				        "value": "B"
+				      },
+				      {
+				        "text": "Answer Text",
+				        "value": "C"
+				      }
+				    ]
+				  },
+				
+				  ...
+				  ]
+				*/
+				
 			});
 		</script>
 		
@@ -70,6 +103,8 @@
 				<legend>Questions</legend>
 				<div id="questions">
 					<div id="question1" class="question">
+						
+						<!-- TODO: Make GUI (re-orderable, dynamic questions)
 						<h3>Question 1</h3>
 						<textarea name="question1_text" class="box-full" style="height: 100px"></textarea>
 						<br/>
@@ -88,7 +123,8 @@
 						</div>
 						<br/><br/>
 					</div>
-					<!-- TODO: Make GUI -->
+					 -->
+					
 					JSON Data for Questions:
 					<textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON">{{questionsJSON}}</textarea>
 				</div>
