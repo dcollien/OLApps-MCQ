@@ -24,6 +24,7 @@ if OpenLearning.isAdmin( request.user )
 	view = retrieveData 'quiz', ['title', 'doneText', 'showAnswers', 'questionsJSON', 'allowMultipleSubmission']
 	
 	view.csrf_token = request.csrfFormInput
+	view.media_url = mediaURL( )
 	
 	response.writeData Mustache.render( template, view )
 else
