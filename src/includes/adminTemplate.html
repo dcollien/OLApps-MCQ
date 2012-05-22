@@ -1,68 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Quiz Admin</title>
-    <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
-    <script src="/common/jquery.min.js"></script>
-	<script src="/app.js"></script>
-    <style>
-      .box-full {
-      	box-sizing: border-box;
-	    -webkit-box-sizing:border-box;
-	    -moz-box-sizing: border-box;
-	    -ms-box-sizing: border-box;
-	    width: 100%;
-      }
-    </style>
-  </head>
-  <body>
-   <div class="container">
-    <form method="post" action="saveAdmin" class="form-horizontal">
-      
-      <fieldset>
-        {{&csrf_token}}
-        
-        <legend>Quiz Set-up</legend>
-        <div class="control-group">
-          <label class="control-label" for="title">Quiz title</label>
-          <div class="controls">
-            <input type="text" class="input-large" name="title" id="title" value="{{title}}">
-          </div>
-        </div>
-        
-        <div class="control-group">
-          <label class="control-label" for="doneText">Submission button text</label>
-          <div class="controls">
-            <input type="text" class="input-large" name="doneText" id="doneText" value="{{doneText}}">
-          </div>
-        </div>
-        
-        <div class="control-group">
-          <label class="control-label" for="doneText">Show answers on completion</label>
-          <div class="controls">
-            <input type="checkbox" name="showAnswers" id="showAnswers" {{#showAnswers}}checked="checked"{{/showAnswers}}>
-          </div>
-        </div>
+	<head>
+		<title>Quiz Admin</title>
+		<link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
+		<script src="/common/jquery.min.js"></script>
+		<script src="/app.js"></script>
+		<style>
+			.box-full {
+				box-sizing: border-box;
+				-webkit-box-sizing:border-box;
+				-moz-box-sizing: border-box;
+				-ms-box-sizing: border-box;
+				width: 100%;
+			}
+
+			.question {
+				border-bottom: 1px solid #ccc;
+			}
+		</style>
+	</head>
+	<body>
+	 <div class="container">
+		<form method="post" action="saveAdmin" class="form-horizontal">
+			
+			<fieldset>
+				{{&csrf_token}}
+				
+				<legend>Quiz Set-up</legend>
+				<div class="control-group">
+					<label class="control-label" for="title">Quiz title</label>
+					<div class="controls">
+						<input type="text" class="input-large" name="title" id="title" value="{{title}}">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="doneText">Submission button text</label>
+					<div class="controls">
+						<input type="text" class="input-large" name="doneText" id="doneText" value="{{doneText}}">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="doneText">Show answers on completion</label>
+					<div class="controls">
+						<input type="checkbox" name="showAnswers" id="showAnswers" {{#showAnswers}}checked="checked"{{/showAnswers}}>
+					</div>
+				</div>
 
 		<div class="control-group">
-          <label class="control-label" for="doneText">Allow Multiple Submission</label>
-          <div class="controls">
-            <input type="checkbox" name="allowMultipleSubmission" id="allowMultipleSubmission" {{#allowMultipleSubmission}}checked="checked"{{/allowMultipleSubmission}}>
-          </div>
-        </div>
-        
-        <legend>Questions</legend>
-        <div id="questions">
-          <!-- TODO: Make GUI -->
-          JSON Data for Questions:
-          <textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON">{{questionsJSON}}</textarea>
-        </div>
-        
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Save Quiz</button>
-        </div>
-      </fieldset>
-    </form>
-   </div>
-  </body>
+					<label class="control-label" for="doneText">Allow Multiple Submission</label>
+					<div class="controls">
+						<input type="checkbox" name="allowMultipleSubmission" id="allowMultipleSubmission" {{#allowMultipleSubmission}}checked="checked"{{/allowMultipleSubmission}}>
+					</div>
+				</div>
+				
+				<legend>Questions</legend>
+				<div id="questions">
+					<div id="question1" class="question">
+						<h3>Question 1</h3>
+						<div style="width:60%; height:100%; display:inline-block">
+							<textarea name="question1_text" class="box-full" style="height: 100px"></textarea>
+						</div>
+						<div style="display: inline-block; padding-left: 10px;">
+							<input type="radio" name="question1_correct" value="A" checked="checked"></input> <input type="text" name="question1_answer1" class="input-large"><br/>
+							<input type="radio" name="question1_correct" value="B"></input> <input type="text" name="question1_answer2" class="input-large"><br/>
+							<input type="radio" name="question1_correct" value="C"></input> <input type="text" name="question1_answer3" class="input-large"><br/>
+							<input type="radio" name="question1_correct" value="D"></input> <input type="text" name="question1_answer4" class="input-large"><br/>
+						</div>
+					</div>
+					<!-- TODO: Make GUI -->
+					JSON Data for Questions:
+					<textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON">{{questionsJSON}}</textarea>
+				</div>
+				
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Save Quiz</button>
+				</div>
+			</fieldset>
+		</form>
+	 </div>
+	</body>
 </html>
