@@ -25,9 +25,9 @@ if OpenLearning.isAdmin( request.user )
 	
 	view.csrf_token = request.csrfFormInput
 	view.jquery_spin = mediaURL( 'jquery-spin.js' )
-	view.spin_button = mediaURL( 'spin-button.jpg' )
-	view.spin_up = mediaURL( 'spin-up.jpg' )
-	view.spin_down = mediaURL( 'spin-down.jpg' )
+	view.spin_button = mediaURL( 'spin-button.png' )
+	view.spin_up = mediaURL( 'spin-up.png' )
+	view.spin_down = mediaURL( 'spin-down.png' )
 	
 	response.writeData Mustache.render( template, view )
 else
