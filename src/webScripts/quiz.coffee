@@ -1,4 +1,4 @@
-include 'moustache.js'
+include 'mustache.js'
 
 template = include 'quizTemplate.html'
 

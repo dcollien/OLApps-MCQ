@@ -4,7 +4,7 @@
     <title>Quiz Admin</title>
     <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
     <script src="/common/jquery.min.js"></script>
-	<script src="/common/app.js"></script>
+	<script src="/app.js"></script>
     <style>
       .box-full {
       	box-sizing: border-box;
@@ -14,55 +14,40 @@
 	    width: 100%;
       }
     </style>
-    <script>
-      $( function( ) {
-        $.getJSON( './loadAdmin', function( data ) {
-          if ( data.error ) {
-            $('body').text( data.error );
-          }	else {
-            $('#title').val( data.title );
-            $('#doneText').val( data.doneText );
-            $('#showAnswers').prop( "checked", data.showAnswers );
-            $('#questionsJSON').val( JSON.stringify( data.questions, undefined, 2 ) );
-            $('#allowMultipleSubmission').prop( "checked", data.allowMultipleSubmission );
-          }
-        } );
-      } );
-    </script>
   </head>
   <body>
    <div class="container">
     <form method="post" action="saveAdmin" class="form-horizontal">
       
       <fieldset>
-        {{ csrf_token }}
+        {{&csrf_token}}
         
         <legend>Quiz Set-up</legend>
         <div class="control-group">
           <label class="control-label" for="title">Quiz title</label>
           <div class="controls">
-            <input type="text" class="input-large" name="title" id="title">
+            <input type="text" class="input-large" name="title" id="title" value="{{title}}">
           </div>
         </div>
         
         <div class="control-group">
           <label class="control-label" for="doneText">Submission button text</label>
           <div class="controls">
-            <input type="text" class="input-large" name="doneText" id="doneText" value="I'm Done">
+            <input type="text" class="input-large" name="doneText" id="doneText" value="{{doneText}}">
           </div>
         </div>
         
         <div class="control-group">
           <label class="control-label" for="doneText">Show answers on completion</label>
           <div class="controls">
-            <input type="checkbox" name="showAnswers" id="showAnswers" checked="checked">
+            <input type="checkbox" name="showAnswers" id="showAnswers" {{#showAnswers}}checked="checked"{{/showAnswers}}>
           </div>
         </div>
 
 		<div class="control-group">
           <label class="control-label" for="doneText">Allow Multiple Submission</label>
           <div class="controls">
-            <input type="checkbox" name="allowMultipleSubmission" id="allowMultipleSubmission">
+            <input type="checkbox" name="allowMultipleSubmission" id="allowMultipleSubmission" {{#allowMultipleSubmission}}checked="checked"{{/allowMultipleSubmission}}>
           </div>
         </div>
         
@@ -70,7 +55,7 @@
         <div id="questions">
           <!-- TODO: Make GUI -->
           JSON Data for Questions:
-          <textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON"></textarea>
+          <textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON">{{questionsJSON}}</textarea>
         </div>
         
         <div class="form-actions">
