@@ -5,11 +5,14 @@
 		<link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
 		<script src="/common/jquery.min.js"></script>
 		<script src="/app.js"></script>
-		<script src="{{ media_url }}/jquery-spin.js"></script>
+		<script src="{{ jquery_spin }}"></script>
 		
 		<script>
 			$(document).ready( function( ) {
-				$.spin.imageBasePath = '{{ media_url }}';
+				$.spin.imageBasePath = '';
+				$.spin.spinBtnImage: '{{ spin_button }}',
+				$.spin.spinUpImage: '{{ spin_up }}',
+				$.spin.spinDownImage: '{{ spin_down }}',
 				$('.spinner').spin( );
 			});
 		</script>

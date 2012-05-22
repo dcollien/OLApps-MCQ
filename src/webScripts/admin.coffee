@@ -24,7 +24,10 @@ if OpenLearning.isAdmin( request.user )
 	view = retrieveData 'quiz', ['title', 'doneText', 'showAnswers', 'questionsJSON', 'allowMultipleSubmission']
 	
 	view.csrf_token = request.csrfFormInput
-	view.media_url = mediaURL( )
+	view.jquery_spin = mediaURL( 'jquery-spin.js' )
+	view.spin_button = mediaURL( 'spin-button.jpg' )
+	view.spin_up = mediaURL( 'spin-up.jpg' )
+	view.spin_down = mediaURL( 'spin-down.jpg' )
 	
 	response.writeData Mustache.render( template, view )
 else
