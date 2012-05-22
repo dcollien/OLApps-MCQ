@@ -23,7 +23,7 @@ if OpenLearning.isAdmin( request.user )
 		
 	view = retrieveData 'quiz', ['title', 'doneText', 'showAnswers', 'questionsJSON', 'allowMultipleSubmission']
 	
-  	view.csrf_token = request.csrfFormInput
+	view.csrf_token = request.csrfFormInput
 	
 	response.writeData Mustache.render( template, view )
 else
