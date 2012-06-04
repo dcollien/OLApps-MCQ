@@ -124,7 +124,7 @@ if hasQuizData
 			mark: marks
 			completed: true
 		
-		OpenLearning.setMarks( taskMarksUpdate )
+		OpenLearning.activity.setMarks( taskMarksUpdate )
 	else
 		quizData = userData
 		

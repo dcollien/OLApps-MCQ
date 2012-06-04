@@ -8,7 +8,7 @@ if OpenLearning.isAdmin( request.user )
 		
 		try
 			questions = JSON.parse( quizData.questionsJSON )
-			OpenLearning.setTotalMarks questions.length
+			OpenLearning.activity.setTotalMarks questions.length
 		catch error
 			quizData.questionsJSON = '[]'
 		
