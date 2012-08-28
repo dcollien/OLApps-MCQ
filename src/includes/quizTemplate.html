@@ -4,7 +4,7 @@
     <title>{{ quizTitle }}</title>
     <link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
     <script src="/common/jquery.min.js"></script>
-	<script src="/app.js"></script>
+	{{&app_init_js}}
   </head>
   <body>
     <form method="post" action="?">
@@ -46,6 +46,7 @@
       </tfoot>
     </table>
       {{^disabled}}<center><button type="submit" class="btn btn-primary">{{doneText}}</button></center>{{/disabled}}
+      <!-- {{submissionURL}} -->
     </form>
   </body>
 </html>

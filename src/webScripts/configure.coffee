@@ -21,6 +21,7 @@ post = ->
 		showAnswers: (quizData.showAnswers is 'on')
 		questionsJSON: quizData.questionsJSON
 		allowMultipleSubmission: quizData.allowMultipleSubmission
+		isEmbedded: true # this app is embedded in the activity page
 
 	# set activity page data
 	try
@@ -38,6 +39,9 @@ get = ->
 		view = OpenLearning.page.getData( request.user )
 	catch err
 		view.error = 'Something went wrong: Unable to load data'
+
+	if not view.questionsJSON?
+		view.questionsJSON = '[]'
 
 	return view
 

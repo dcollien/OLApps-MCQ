@@ -1,21 +1,35 @@
 include 'mustache.js'
+include 'util.js'
 
 template = include 'quizTemplate.html'
 
 
 # Collect Data
-quiz = retrieveData 'quiz', ['title', 'doneText', 'showAnswers', 'questionsJSON', 'allowMultipleSubmission']
+quiz = OpenLearning.page.getData( request.user )
 
 hasQuizData = false
 if quiz.questionsJSON
-	quiz.questions = JSON.parse( quiz.questionsJSON )
-	hasQuizData = true
+	try
+		quiz.questions = JSON.parse( quiz.questionsJSON )
+		hasQuizData = true
+	catch error
+	  	hasQuizData = false
 	
 user = 'test'
 if request.user
 	user = request.user
-	
-userData = (retrieveData user, ['quizData']).quizData
+
+submissionData = null
+submissionURL = ''
+try
+	submissionData = (OpenLearning.activity.getSubmission user)
+	userData = submissionData.submission.metadata
+	submissionURL = submissionData.url
+catch error
+	userData = null
+
+if (Object.keys(userData).length is 0)
+	userData = null
 
 # function to render and mark a quiz
 renderAndMark = (userData) ->
@@ -98,24 +112,26 @@ renderAndMark = (userData) ->
 		resultText: resultText
 		quizResult: quizResult
 		doneText: quiz.doneText
-		csrf_token: request.csrfFormInput
+		submissionURL: submissionURL
 
-	response.writeData Mustache.render( template, view )
+	render( template, view )
 	
 	return marks
 	
 
 if hasQuizData
 	
-	canSubmit = quiz.allowMultipleSubmission or not userData
+	canSubmit = quiz.allowMultipleSubmission or (not userData)
 	
 	if request.method is 'POST' and canSubmit
 		# submission
 		
 		quizData = request.data
 		quizData.canSubmit = canSubmit
-		
-		storeData user, { quizData: quizData }
+
+		# TODO: markup
+		OpenLearning.activity.saveSubmission user, { markup: 'This is a quiz submission', metadata: quizData }, 'content'
+
 		marks = renderAndMark( quizData )
 		
 		taskMarksUpdate = { }
