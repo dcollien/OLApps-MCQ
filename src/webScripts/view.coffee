@@ -2,7 +2,7 @@ include 'mustache.js'
 include 'util.js'
 
 template = include 'quizTemplate.html'
-
+markupTemplate = include 'markup.html'
 
 # Collect Data
 quiz = OpenLearning.page.getData( request.user )
