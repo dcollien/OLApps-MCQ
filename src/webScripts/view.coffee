@@ -141,6 +141,7 @@ if hasQuizData
 			completed: true
 			comment: 'Marked by Quiz Activity'
 		
+		OpenLearning.activity.submit( request.user )
 		OpenLearning.activity.setMarks( taskMarksUpdate )
 	else
 		quizData = userData
