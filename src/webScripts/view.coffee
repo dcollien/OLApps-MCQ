@@ -116,7 +116,7 @@ renderAndMark = (userData) ->
 
 	render( template, view )
 	
-	return marks
+	return [marks, view]
 	
 
 if hasQuizData
@@ -129,10 +129,14 @@ if hasQuizData
 		quizData = request.data
 		quizData.canSubmit = canSubmit
 
-		# TODO: markup
-		OpenLearning.activity.saveSubmission user, { markup: 'This is a quiz submission', metadata: quizData }, 'content'
 
-		marks = renderAndMark( quizData )
+		[marks, view] = renderAndMark( quizData )
+
+		markup = Mustache.render markupTemplate, view
+
+		# TODO: markup
+		OpenLearning.activity.saveSubmission user, { markup: markup, metadata: quizData }, 'content'
+
 		
 		taskMarksUpdate = { }
 

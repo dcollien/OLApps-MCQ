@@ -1,0 +1,32 @@
+== {{ quizTitle }} ==
+
+
+{{#questions}}
+----
+=== Question {{number}} ===
+
+{{text}}
+
+{{#answered}}
+	{{#correct}}
+		**Correct!**
+	{{/correct}}
+				
+	{{^correct}}
+		Incorrect
+	{{/correct}}
+{{/answered}}
+				
+{{#answers}}
+
+{{#showAsCorrect}}* {{#selected}}**Selected:**{{/selected}} {{#correct}}**{{/correct}}{{text}}{{#correct}}**{{/correct}} {{/showAsCorrect}}
+{{^showAsCorrect}}* {{#selected}}**Selected:**{{/selected}} {{text}}{{/showAsCorrect}}
+
+{{/answers}}
+
+{{/questions}}
+
+----
+{{resultText}}
+
+{{quizResult}}
