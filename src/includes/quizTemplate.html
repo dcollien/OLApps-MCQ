@@ -51,7 +51,7 @@
 
     {{#isAnswerChanged}}
     <script type="text/javascript">
-    	$(document).ready( function() {
+    	window.app.ready( function() {
     		window.app.sendMessage( 'updateProgress', {} );
     	} );
     </script>
