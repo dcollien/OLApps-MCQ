@@ -32,7 +32,7 @@ if (Object.keys(userData).length is 0)
 	userData = null
 
 # function to render and mark a quiz
-renderAndMark = (userData) ->
+renderAndMark = (userData, isAnswerChanged=false) ->
 	isAnswered = false
 
 	# has this quiz been answered?
@@ -113,6 +113,7 @@ renderAndMark = (userData) ->
 		quizResult: quizResult
 		doneText: quiz.doneText
 		submissionURL: submissionURL
+		isAnswerChanged: isAnswerChanged
 
 	render( template, view )
 	
@@ -130,7 +131,7 @@ if hasQuizData
 		quizData.canSubmit = canSubmit
 
 
-		[marks, view] = renderAndMark( quizData )
+		[marks, view] = renderAndMark( quizData, true )
 
 		markup = Mustache.render markupTemplate, view
 
