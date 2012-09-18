@@ -41,7 +41,7 @@
             
             var k,
                 keys = this.name.match(patterns.key),
-                merge = this.value,
+                merge = this.value.replace(new RegExp("(%0A)", "g"), '\n');
                 reverse_key = this.name;
             
             while((k = keys.pop()) !== undefined){
