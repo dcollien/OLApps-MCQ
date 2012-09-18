@@ -30,12 +30,12 @@
 					$row = $('<tr>');
 					$questionTable.append( $row );
 					
-					$questionCell = $('<td>');
+					$questionCell = $('<td style="text-align: top;">');
 					$answerCell = $('<td>');
 
 					$row.append( $questionCell ).append( $answerCell );
 
-					var $label = $('<span>').text( (index+1) + ': ' );
+					var $label = $('<span style="text-align: top;">').text( (index+1) + ': ' );
 
 					var $text = $('<textarea name="questions[' + index + '][text]" class="box" style="width: 280px; height: 100%;">').val( element.text );
 					
