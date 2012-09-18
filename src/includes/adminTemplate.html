@@ -34,8 +34,8 @@
 					var $answers = $('<div class="controls">');
 
 					$(element.answers).each( function( ansIndex, ansElement ) {
-						var $answerText = $('<input type="text" name="questions[' + index + '][answers][text]" class="input-large">').val( ansElement.text );
-						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][value]" class="input-mini">').val( ansElement.value );
+						var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-large">').val( ansElement.text );
+						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
 
 						$answers.append( $answerText );
 						$answers.append( $answerValue );
