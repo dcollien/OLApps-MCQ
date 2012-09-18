@@ -34,7 +34,7 @@
 					var $answers = $('<div>');
 
 					$(element.answers).each( function( ansIndex, ansElement ) {
-						var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xxlarge">').val( ansElement.text );
+						var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
 
 						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
 
@@ -79,8 +79,11 @@
 
 				$('.addAnswerButton').click( function( ) {
 					questions = form.toJSON();
+					console.log( questions );
 					var questionIndex = $(this).data( 'questionIndex' );
+					console.log( questionIndex );
 					var answers = questions[questionIndex].answers;
+					console.log( answers );
 					answers.push( {
 						text: "Answer Text",
 						value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length]
