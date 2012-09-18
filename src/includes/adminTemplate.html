@@ -30,6 +30,35 @@
 				return false;
 			};
 
+			var deleteAnswer = function( ) {
+				questions = form.toJSON().questions;
+
+				var questionIndex = $(this).data( 'questionIndex' );
+				var answerIndex = $(this).data( 'answerIndex' );
+
+				var answers = questions[questionIndex].answers;
+
+				answers.splice( answerIndex, 1 );
+
+				$('#questionsJSON').val( JSON.stringify( questions ) );
+				form = buildQuestions( questions );
+
+				return false;
+			};
+
+			var deleteQuestion = function( ) {
+				questions = form.toJSON().questions;
+
+				var questionIndex = $(this).data( 'questionIndex' );
+
+				questions.splice( questionIndex, 1 );
+
+				$('#questionsJSON').val( JSON.stringify( questions ) );
+				form = buildQuestions( questions );
+
+				return false;
+			};
+
 			var addQuestion = function( ) {
 				questions = form.toJSON().questions;
 
@@ -78,6 +107,11 @@
 
 						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
 
+						var $delAnswerButton = $('<a href="#">&times;</a>');
+						$delAnswerButton.data( 'questionIndex', index );
+						$delAnswerButton.data( 'answerIndex', ansIndex );
+						$delAnswerButton.click( deleteAnswer );
+
 						$answers.append( $answerValue );
 						$answers.append( $answerText );
 						$answers.append( '<br>' );
@@ -100,7 +134,7 @@
 				
 				$addQuestionButton = $('<a href="#" class="btn btn-success">Add Question</a>');
 				$addQuestionButton.click( addQuestion );
-				
+
 				$questionForm.append( $questionTable ).append( $('<center>').html( $addQuestionButton ) );
 
 				$('#questions').html( $questionForm );
