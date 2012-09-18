@@ -9,17 +9,7 @@
 		<script src="{{ jquery_json }}"></script>
 		
 		<script>
-			$(document).ready( function( ) {
-
-				$.spin.imageBasePath = '';
-				$.spin.spinBtnImage  = '{{ spin_button }}';
-				$.spin.spinUpImage   = '{{ spin_up }}';
-				$.spin.spinDownImage = '{{ spin_down }}';
-				$('.spinner').spin( { max: 10, min: 2 } );
-				
-				var questions = {{&questionsJSON}};
-				//var questions = JSON.parse( questionsJSON );
-				
+			var buildQuestions = function( questions ) {
 				var $questionForm = $('<form class="form-horizontal">');
 				var $questionTable = $('<table class="table">');
 
@@ -64,6 +54,20 @@
 				$questionForm.append( $questionTable );
 
 				$('#questions').html( $questionForm );
+			};
+
+			$(document).ready( function( ) {
+
+				$.spin.imageBasePath = '';
+				$.spin.spinBtnImage  = '{{ spin_button }}';
+				$.spin.spinUpImage   = '{{ spin_up }}';
+				$.spin.spinDownImage = '{{ spin_down }}';
+				$('.spinner').spin( { max: 10, min: 2 } );
+				
+				var questions = {{&questionsJSON}};
+				//var questions = JSON.parse( questionsJSON );
+				
+				buildQuestions( questions );
 
 				/*
 				JSON format:
