@@ -13,21 +13,20 @@
 				var $questionForm = $('<form class="form-horizontal">');
 				var $questionTable = $('<table class="table">');
 
-				$questionTable.append( $('<tr><th>Question</th><th>Answers</th></tr>') );
+				$questionTable.append( $('<tr><th>#</th><th>Question</th><th>Answers</th></tr>') );
 
 				$(questions).each( function( index, element ) {
 
 					$row = $('<tr>');
 					$questionTable.append( $row );
 					
+					$numberCell = $('<td>').text( (index+1) );
 					$questionCell = $('<td style="text-align: top;">');
 					$answerCell = $('<td>');
 
-					$row.append( $questionCell ).append( $answerCell );
+					$row.append( $numberCell ).append( $questionCell ).append( $answerCell );
 
-					var $label = $('<span style="text-align: top;">').text( (index+1) + ': ' );
-
-					var $text = $('<textarea name="questions[' + index + '][text]" class="box" style="width: 280px; height: 100%;">').val( element.text );
+					var $text = $('<textarea name="questions[' + index + '][text]" class="box-full" style="height: 100%;">').val( element.text );
 					
 					var $correct = $('<input type="text" name="questions[' + index + '][correct]" class="input-mini">').val( element.correct );
 					
@@ -47,7 +46,7 @@
 
 					$addAnswerButton.data( 'questionIndex', index );
 
-					$questionCell.append( $label ).append( $text );
+					$questionCell.append( $text );
 					$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
 					$answerCell.append( '<br><br>' );
 					$answerCell.append( $answers );
@@ -78,16 +77,16 @@
 				var form = buildQuestions( questions );
 
 				$('.addAnswerButton').click( function( ) {
-					questions = form.toJSON();
-					console.log( questions );
+					questions = form.toJSON().questions;
+
 					var questionIndex = $(this).data( 'questionIndex' );
-					console.log( questionIndex );
 					var answers = questions[questionIndex].answers;
-					console.log( answers );
+
 					answers.push( {
 						text: "Answer Text",
 						value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length]
 					} );
+
 					form = buildQuestions( questions );
 					return false;
 				} );
