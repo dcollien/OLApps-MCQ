@@ -5,7 +5,6 @@
 		<link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
 		<script src="/common/jquery.min.js"></script>
 		{{&app_init_js}}
-		<script src="{{ jquery_spin }}"></script>
 		<script src="{{ jquery_json }}"></script>
 		
 		<script>
@@ -102,6 +101,8 @@
 					$deleteQuestionButton.data( 'questionIndex', index );
 					$deleteQuestionButton.click( deleteQuestion );
 
+					$deleteCell.append( $deleteQuestionButton );
+
 					var $text = $('<textarea name="questions[' + index + '][text]" class="box-full" style="height: 100%;">').val( element.text );
 					
 					var $correct = $('<input type="text" name="questions[' + index + '][correct]" class="input-mini">').val( element.correct );
@@ -142,7 +143,7 @@
 				$addQuestionButton = $('<a href="#" class="btn btn-success">Add Question</a>');
 				$addQuestionButton.click( addQuestion );
 
-				$questionForm.append( $questionTable ).append( $('<center>').html( $addQuestionButton ) );
+				$questionForm.append( $questionTable ).append( '<hr>' ).append( $('<center>').html( $addQuestionButton ) );
 
 				$('#questions').html( $questionForm );
 
@@ -150,18 +151,8 @@
 			};
 
 			$(document).ready( function( ) {
-
-				$.spin.imageBasePath = '';
-				$.spin.spinBtnImage  = '{{ spin_button }}';
-				$.spin.spinUpImage   = '{{ spin_up }}';
-				$.spin.spinDownImage = '{{ spin_down }}';
-				$('.spinner').spin( { max: 10, min: 2 } );
-				
 				questions = {{&questionsJSON}};
-				//var questions = JSON.parse( questionsJSON );
-				
 				form = buildQuestions( questions );
-
 
 				/*
 				JSON format:
@@ -188,7 +179,6 @@
 				  ...
 				  ]
 				*/
-				
 			});
 		</script>
 		

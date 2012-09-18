@@ -53,10 +53,6 @@ checkPermission 'write', accessDeniedTemplate, ->
 		view = get()
 
 	view.jquery_json = mediaURL( 'jquery-json.js' )
-	view.jquery_spin = mediaURL( 'jquery-spin.js' )
-	view.spin_button = mediaURL( 'spin-button.png' )
-	view.spin_up = mediaURL( 'spin-up.png' )
-	view.spin_down = mediaURL( 'spin-down.png' )
 
 	render template, view
 
