@@ -20,13 +20,23 @@
 				var questions = {{&questionsJSON}};
 				//var questions = JSON.parse( questionsJSON );
 				
-				var $questionBox = $('<form class="form-horizontal">');
+				var $questionForm = $('<form class="form-horizontal">');
+				var $questionTable = $('<table class="table">');
+
+				$questionTable.append( $('<tr><th>Question</th><th>Answers</th></tr>') );
 
 				$(questions).each( function( index, element ) {
-					var $ctrlGroup = $('<div class="control-group">');
 
-					var $label = $('<label class="control-label">').text( 'Question ' + (index+1) );
+					$row = $('<tr>');
+					$questionTable.append( $row );
 					
+					$questionCell = $('<td>');
+					$answerCell = $('<td>');
+
+					$row.append( $questionCell ).append( $answerCell );
+
+					var $label = $('<span>').text( (index+1) + ': ' );
+
 					var $text = $('<input type="text" name="questions[' + index + '][text]" class="input-large">').val( element.text );
 					
 					var $correct = $('<input type="text" name="questions[' + index + '][correct]" class="input-mini">').val( element.correct );
@@ -42,20 +52,17 @@
 						$answers.append( '<br>' );
 					} );
 
-					$ctrlGroup.append( $label );
-					$ctrlGroup.append( '<br>' );
-					$ctrlGroup.append( $text );
-					$ctrlGroup.append( '<br>' );
-					$ctrlGroup.append( $('<label class="control-label">').text( 'Correct Answer (identifier):' ) );
-					$ctrlGroup.append( $correct );
-					$ctrlGroup.append( $('<label class="control-label">').text( 'Answers:' ) );
-					$ctrlGroup.append( '<br>' );
-					$ctrlGroup.append( $answers );
+					$questionCell.append( $label ).append( $text );
+					$answerCell.append( $('<span>Correct Answer:</span>') ).append( $correct );
+					$answerCell.append( '<br>' );
+					$answerCell.append( $answers );
 
-					$questionBox.append( $ctrlGroup );
+					$questionTable.append( $row );
 				} );
 				
-				$('#questions').html( $questionBox );
+				$questionForm.append( $questionTable );
+
+				$('#questions').html( $questionForm );
 
 				/*
 				JSON format:
