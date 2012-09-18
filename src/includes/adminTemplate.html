@@ -163,6 +163,7 @@
 				form = buildQuestions( questions );
 
 				$('#saveButton').click( function( ) {
+					questions = form.toJSON();
 					$('#questionsJSON').val( JSON.stringify( questions ) );
 					$('#configForm').submit();
 					return false;
