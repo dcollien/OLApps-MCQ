@@ -89,14 +89,15 @@
 					$row = $('<tr>');
 					$questionTable.append( $row );
 					
-					$numberCell = $('<td>').text( (index+1) );
+					$numberCell = $('<td style="font-weight: bold">').text( (index+1) );
 					$questionCell = $('<td style="text-align: top;">');
 					$answerCell = $('<td>');
 					$deleteCell = $('<td>');
 
 					$row.append( $numberCell ).append( $questionCell ).append( $answerCell ).append( $deleteCell );
 
-					$deleteQuestionButton = $('<a href="#" class="btn btn-danger"><i class="icon-remove icon-white"></i>');
+					$deleteQuestionButton = $('<a href="#" class="delQnButton"><i class="icon-remove"></i>');
+					$deleteQuestionButton.tooltip( { title: 'Delete' } );
 
 					$deleteQuestionButton.data( 'questionIndex', index );
 					$deleteQuestionButton.click( deleteQuestion );
@@ -212,6 +213,12 @@
 			.delAnswerButton:hover {
 				text-decoration: none;
 				color: #f44;
+			}
+
+			.delQnButton {
+				display: block;
+				width: 32px;
+				height: 32px;
 			}
 		</style>
 	</head>
