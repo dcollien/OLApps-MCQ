@@ -48,9 +48,9 @@
 
 					$questionBox.append( $ctrlGroup );
 				} );
-
-				console.log( $questionBox.toJSON() );
 				
+				$('#questions').html( $questionBox );
+
 				/*
 				JSON format:
 				questions = [
@@ -155,9 +155,8 @@
 						<br/><br/>
 					</div>
 					 -->
-					
-					JSON Data for Questions:
-					<textarea name="questionsJSON" class="box-full" style="height: 280px" id="questionsJSON">{{questionsJSON}}</textarea>
+					<div id="questions"></div>
+					<textarea name="questionsJSON" class="box-full hide" style="height: 280px" id="questionsJSON">{{questionsJSON}}</textarea>
 				</div>
 				
 				<div class="form-actions">
