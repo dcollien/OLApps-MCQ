@@ -81,9 +81,9 @@
 
 			var buildQuestions = function( questions ) {
 				var $questionForm = $('<form class="form-horizontal">');
-				var $questionTable = $('<table class="table">');
+				var $questionTable = $('<table class="table table-striped">');
 
-				$questionTable.append( $('<tr><th>#</th><th>Question</th><th>Answers</th></tr>') );
+				$questionTable.append( $('<tr><th>#</th><th>Question</th><th>Answers</th><th></th></tr>') );
 
 				$(questions).each( function( index, element ) {
 
@@ -93,8 +93,14 @@
 					$numberCell = $('<td>').text( (index+1) );
 					$questionCell = $('<td style="text-align: top;">');
 					$answerCell = $('<td>');
+					$deleteCell = $('<td>');
 
-					$row.append( $numberCell ).append( $questionCell ).append( $answerCell );
+					$row.append( $numberCell ).append( $questionCell ).append( $answerCell ).append( $deleteCell );
+
+					$deleteQuestionButton = $('<a href="#" class="btn btn-danger"><i class="icon-remove icon-white"></i>');
+
+					$deleteQuestionButton.data( 'questionIndex', index );
+					$deleteQuestionButton.click( deleteQuestion );
 
 					var $text = $('<textarea name="questions[' + index + '][text]" class="box-full" style="height: 100%;">').val( element.text );
 					
@@ -209,7 +215,7 @@
 			.delAnswerButton {
 				font-size: 14px;
 				margin-left: 4px;
-				color: #866;
+				color: #a66;
 				font-weight: bold;
 			}
 
