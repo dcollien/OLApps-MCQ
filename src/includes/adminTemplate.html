@@ -234,7 +234,11 @@
 		</style>
 	</head>
 	<body>
-	{{error}}
+
+		{{#error}}<br/> <br/><div class="alert">{{error}}</div><br/> <br/>{{/error}}
+
+		{{#message}}<br/> <br/><div class="alert alert-success">{{message}}</div><br/> <br/>{{/message}}
+		
 	 <div class="container">
 		<form method="post" class="form-horizontal">
 			

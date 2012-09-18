@@ -29,6 +29,8 @@ post = ->
 	catch err
 		view.error = 'Something went wrong: Unable to save data'
 	
+	view.message = "Quiz Saved"
+
 	return view
 
 get = ->
