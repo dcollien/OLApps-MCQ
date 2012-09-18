@@ -37,14 +37,14 @@
 
 					var $label = $('<span>').text( (index+1) + ': ' );
 
-					var $text = $('<textarea name="questions[' + index + '][text]" class="box-full">').val( element.text );
+					var $text = $('<textarea name="questions[' + index + '][text]" class="box" style="width: 280px; height: 100%;">').val( element.text );
 					
 					var $correct = $('<input type="text" name="questions[' + index + '][correct]" class="input-mini">').val( element.correct );
 					
 					var $answers = $('<div>');
 
 					$(element.answers).each( function( ansIndex, ansElement ) {
-						var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-large">').val( ansElement.text );
+						var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
 
 						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
 
@@ -54,7 +54,7 @@
 					} );
 
 					$questionCell.append( $label ).append( $text );
-					$answerCell.append( $('<span>Correct:</span>') ).append( $correct );
+					$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
 					$answerCell.append( '<br><br>' );
 					$answerCell.append( $answers );
 
@@ -95,6 +95,13 @@
 		</script>
 		
 		<style>
+			.box {
+				box-sizing: border-box;
+				-webkit-box-sizing:border-box;
+				-moz-box-sizing: border-box;
+				-ms-box-sizing: border-box;
+			}
+
 			.box-full {
 				box-sizing: border-box;
 				-webkit-box-sizing:border-box;
