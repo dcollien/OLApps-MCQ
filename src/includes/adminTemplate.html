@@ -164,6 +164,9 @@
 
 				$('#saveButton').click( function( ) {
 					questions = form.toJSON().questions;
+					if (!questions) {
+						questions = [];
+					}
 					$('#questionsJSON').val( JSON.stringify( questions ) );
 					$('#configForm').submit();
 					return false;
