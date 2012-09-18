@@ -22,10 +22,31 @@
 					value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length]
 				} );
 
+				$('#questionsJSON').val( JSON.stringify( questions ) );
 				form = buildQuestions( questions );
 
 				window.app.resize();
-				
+
+				return false;
+			};
+
+			var addQuestion = function( ) {
+				questions = form.toJSON().questions;
+
+				questions.push( {
+					text: "Question Text",
+					correct: "A",
+					answers: [ {
+						text: "Answer Text",
+						value: "A"
+					} ]
+				} );
+
+				$('#questionsJSON').val( JSON.stringify( questions ) );
+				form = buildQuestions( questions );
+
+				window.app.resize();
+
 				return false;
 			};
 
@@ -77,7 +98,10 @@
 					$questionTable.append( $row );
 				} );
 				
-				$questionForm.append( $questionTable );
+				$addQuestionButton = $('<a href="#" class="btn btn-success">Add Question</a>');
+				$addQuestionButton.click( addQuestion );
+				
+				$questionForm.append( $questionTable ).append( $('<center>').html( $addQuestionButton ) );
 
 				$('#questions').html( $questionForm );
 
@@ -186,29 +210,7 @@
 				</div>
 				
 				<legend>Questions</legend>
-				<div id="questions">
-					<div id="question1" class="question">
-						
-						<!-- TODO: Make GUI (re-orderable, dynamic questions)
-						<h3>Question 1</h3>
-						<textarea name="question1_text" class="box-full" style="height: 100px"></textarea>
-						<br/>
-						<h4>Answers:</h4>
-						<div class="well" style="float:right; margin-right: 15px">
-							<center>
-								Number of Answers:<br/>
-								<input type="text" class="spinner input-mini" name="question1_numAnswers" value="4">
-							</center>
-						</div>
-						<div style="display: inline-block; padding-left: 10px;">
-							<input type="radio" name="question1_correct" value="A" checked="checked"></input> <input type="text" name="question1_answer1" class="input-xlarge" style="margin-top: 3px"><br/>
-							<input type="radio" name="question1_correct" value="B"></input> <input type="text" name="question1_answer2" class="input-xlarge" style="margin-top: 3px"><br/>
-							<input type="radio" name="question1_correct" value="C"></input> <input type="text" name="question1_answer3" class="input-xlarge" style="margin-top: 3px"><br/>
-							<input type="radio" name="question1_correct" value="D"></input> <input type="text" name="question1_answer4" class="input-xlarge" style="margin-top: 3px"><br/>
-						</div>
-						<br/><br/>
-					</div>
-					 -->
+				<div>
 					<div id="questions"></div>
 					<textarea name="questionsJSON" class="box-full hide" style="height: 280px" id="questionsJSON">{{questionsJSON}}</textarea>
 				</div>
