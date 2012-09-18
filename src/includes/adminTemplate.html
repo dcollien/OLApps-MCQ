@@ -25,7 +25,7 @@
 				$(questions).each( function( index, element ) {
 					var $ctrlGroup = $('<div class="control-group">');
 
-					var $label = $('<label class="control-label" for="question">').text( 'Question ' + index );
+					var $label = $('<label class="control-label">').text( 'Question ' + (index+1) );
 					
 					var $text = $('<input type="text" name="questions[' + index + '][text]" class="input-large">').val( element.text );
 					
@@ -39,11 +39,13 @@
 
 						$answers.append( $answerText );
 						$answers.append( $answerValue );
+						$answers.append( '<br>' );
 					} );
 
 					$ctrlGroup.append( $label );
 					$ctrlGroup.append( $text );
 					$ctrlGroup.append( $correct );
+					$ctrlGroup.append( $('<label class="control-label">').text( 'Answers:' ) );
 					$ctrlGroup.append( $answers );
 
 					$questionBox.append( $ctrlGroup );
