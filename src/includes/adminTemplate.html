@@ -43,9 +43,13 @@
 					} );
 
 					$ctrlGroup.append( $label );
+					$ctrlGroup.append( '<br>' );
 					$ctrlGroup.append( $text );
+					$ctrlGroup.append( '<br>' );
+					$ctrlGroup.append( $('<label class="control-label">').text( 'Correct Answer (identifier):' ) );
 					$ctrlGroup.append( $correct );
 					$ctrlGroup.append( $('<label class="control-label">').text( 'Answers:' ) );
+					$ctrlGroup.append( '<br>' );
 					$ctrlGroup.append( $answers );
 
 					$questionBox.append( $ctrlGroup );
