@@ -107,7 +107,7 @@
 
 						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
 
-						var $delAnswerButton = $('<a href="#">&times;</a>');
+						var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
 						$delAnswerButton.data( 'questionIndex', index );
 						$delAnswerButton.data( 'answerIndex', ansIndex );
 						$delAnswerButton.click( deleteAnswer );
@@ -204,6 +204,13 @@
 
 			.question {
 				border-bottom: 1px solid #ccc;
+			}
+
+			.delAnswerButton {
+				font-size: 14px;
+				margin-left: 4px;
+				text-decoration: none;
+				color: #f44;
 			}
 		</style>
 	</head>
