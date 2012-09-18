@@ -6,9 +6,11 @@
 		<script src="/common/jquery.min.js"></script>
 		{{&app_init_js}}
 		<script src="{{ jquery_spin }}"></script>
+		<script src="{{ jquery_json }}"></script>
 		
 		<script>
 			$(document).ready( function( ) {
+
 				$.spin.imageBasePath = '';
 				$.spin.spinBtnImage  = '{{ spin_button }}';
 				$.spin.spinUpImage   = '{{ spin_up }}';
@@ -18,8 +20,36 @@
 				var questions = {{&questionsJSON}};
 				//var questions = JSON.parse( questionsJSON );
 				
-				// TODO GUI
-				console.log( questions );
+				var $questionBox = $('<form class="form-horizontal">');
+
+				$(questions).each( function( index, element ) {
+					var $ctrlGroup = $('<div class="control-group">');
+
+					var $label = $('<label class="control-label" for="question">').text( 'Question ' + index );
+					
+					var $text = $('<input type="text" name="questions[][text]" class="input-large">').val( element.text );
+					
+					var $correct = $('<input type="text" name="questions[][correct]" class="input-mini">').val( element.correct );
+					
+					var $answers = $('<div class="controls">');
+
+					$(element.answers).each( function( ansIndex, ansElement ) {
+						var $answerText = $('<input type="text" name="questions[][answers][text]" class="input-large">').val( ansElement.text );
+						var $answerValue = $('<input type="text" name="questions[][answers][value]" class="input-mini">').val( ansElement.value );
+
+						$answers.append( $answerText );
+						$answers.append( $answerValue );
+					} );
+
+					$ctrlGroup.append( $label );
+					$ctrlGroup.append( $text );
+					$ctrlGroup.append( $correct );
+					$ctrlGroup.append( $answers );
+
+					$questionBox.append( $ctrlGroup );
+				} );
+
+				console.log( $questionBox.toJSON() );
 				
 				/*
 				JSON format:
@@ -94,7 +124,7 @@
 					</div>
 				</div>
 
-		<div class="control-group">
+				<div class="control-group">
 					<label class="control-label" for="doneText">Allow Multiple Submission</label>
 					<div class="controls">
 						<input type="checkbox" name="allowMultipleSubmission" id="allowMultipleSubmission" {{#allowMultipleSubmission}}checked="checked"{{/allowMultipleSubmission}}>
