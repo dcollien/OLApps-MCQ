@@ -9,6 +9,23 @@
 		<script src="{{ jquery_json }}"></script>
 		
 		<script>
+			var form, questions;
+
+			var addAnswer = function( ) {
+				questions = form.toJSON().questions;
+
+				var questionIndex = $(this).data( 'questionIndex' );
+				var answers = questions[questionIndex].answers;
+
+				answers.push( {
+					text: "Answer Text",
+					value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length]
+				} );
+
+				form = buildQuestions( questions );
+				return false;
+			};
+
 			var buildQuestions = function( questions ) {
 				var $questionForm = $('<form class="form-horizontal">');
 				var $questionTable = $('<table class="table">');
@@ -45,6 +62,7 @@
 					var $addAnswerButton = $('<a href="#" class="btn addAnswerButton"><i class="icon-plus"></i> Add Answer</a>');
 
 					$addAnswerButton.data( 'questionIndex', index );
+					$addAnswerButton.click( addAnswer );
 
 					$questionCell.append( $text );
 					$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
@@ -71,25 +89,11 @@
 				$.spin.spinDownImage = '{{ spin_down }}';
 				$('.spinner').spin( { max: 10, min: 2 } );
 				
-				var questions = {{&questionsJSON}};
+				questions = {{&questionsJSON}};
 				//var questions = JSON.parse( questionsJSON );
 				
-				var form = buildQuestions( questions );
+				form = buildQuestions( questions );
 
-				$('.addAnswerButton').click( function( ) {
-					questions = form.toJSON().questions;
-
-					var questionIndex = $(this).data( 'questionIndex' );
-					var answers = questions[questionIndex].answers;
-
-					answers.push( {
-						text: "Answer Text",
-						value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length]
-					} );
-
-					form = buildQuestions( questions );
-					return false;
-				} );
 
 				/*
 				JSON format:
