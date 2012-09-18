@@ -12,6 +12,9 @@
 
 			var addAnswer = function( ) {
 				questions = form.toJSON().questions;
+				if (!questions) {
+					questions = [];
+				}
 
 				var questionIndex = $(this).data( 'questionIndex' );
 				var answers = questions[questionIndex].answers;
@@ -31,6 +34,9 @@
 
 			var deleteAnswer = function( ) {
 				questions = form.toJSON().questions;
+				if (!questions) {
+					questions = [];
+				}
 
 				var questionIndex = $(this).data( 'questionIndex' );
 				var answerIndex = $(this).data( 'answerIndex' );
@@ -47,6 +53,9 @@
 
 			var deleteQuestion = function( ) {
 				questions = form.toJSON().questions;
+				if (!questions) {
+					questions = [];
+				}
 
 				var questionIndex = $(this).data( 'questionIndex' );
 
@@ -60,6 +69,9 @@
 
 			var addQuestion = function( ) {
 				questions = form.toJSON().questions;
+				if (!questions) {
+					questions = [];
+				}
 
 				questions.push( {
 					text: "Question Text",
