@@ -38,7 +38,7 @@ get = ->
 
 	# get activity page data
 	try
-		view = OpenLearning.page.getData( request.user )
+		view = OpenLearning.page.getData( request.user ).data
 	catch err
 		view.error = 'Something went wrong: Unable to load data'
 

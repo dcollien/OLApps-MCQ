@@ -5,7 +5,7 @@ template = include 'quizTemplate.html'
 markupTemplate = include 'markup.html'
 
 # Collect Data
-quiz = OpenLearning.page.getData( request.user )
+quiz = OpenLearning.page.getData( request.user ).data
 
 hasQuizData = false
 if quiz.questionsJSON
