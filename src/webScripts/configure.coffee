@@ -9,19 +9,18 @@ accessDeniedTemplate = include "accessDeniedTemplate.html"
 post = ->
 	quizData = request.data
 	
-	try
-		questions = JSON.parse( quizData.questionsJSON )
-		OpenLearning.activity.setTotalMarks questions.length
-	catch error
-		quizData.questionsJSON = '[]'
-	
 	view =
 		title: quizData.title
 		doneText: quizData.doneText
 		showAnswers: (quizData.showAnswers is 'on')
-		questionsJSON: quizData.questionsJSON
+		questions: JSON.parse( quizData.questionsJSON )
 		allowMultipleSubmission: quizData.allowMultipleSubmission
 		isEmbedded: true # this app is embedded in the activity page
+
+	try
+		OpenLearning.activity.setTotalMarks questions.length
+	catch error
+		view.error = "Something went wrong: Unable to set marks"
 
 	# set activity page data
 	try
@@ -42,8 +41,10 @@ get = ->
 	catch err
 		view.error = 'Something went wrong: Unable to load data'
 
-	if not view.questionsJSON?
-		view.questionsJSON = '[]'
+	if not view.questions?
+		view.questions = []
+	
+	view.questionsJSON = JSON.stringify( view.questions )
 
 	return view
 
