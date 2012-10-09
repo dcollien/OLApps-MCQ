@@ -11,11 +11,12 @@ hasQuizData = true
 if quiz.questionsJSON
 	try
 		quiz.questions = JSON.parse( quiz.questionsJSON )
-		hasQuizData = true
+		response.writeText "Problem parsing JSON: " + quiz.questionsJSON
 	catch error
 	  	hasQuizData = false
 else if not quiz.questions
 	hasQuizData = false
+	response.writeText "No Questions."
 
 user = 'test'
 if request.user
