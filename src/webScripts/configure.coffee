@@ -19,7 +19,7 @@ post = ->
 		questionsJSON: null
 
 	try
-		OpenLearning.activity.setTotalMarks questions.length
+		OpenLearning.activity.setTotalMarks view.questions.length
 	catch error
 		view.error = "Something went wrong: Unable to set marks"
 
@@ -45,9 +45,6 @@ get = ->
 	if not view.questions?
 		view.questions = []
 
-	if not view.questionsJSON
-		view.questionsJSON = JSON.stringify( view.questions )
-	
 	return view
 
 
@@ -56,6 +53,9 @@ checkPermission 'write', accessDeniedTemplate, ->
 		view = post()
 	else
 		view = get()
+	
+	if not view.questionsJSON
+		view.questionsJSON = JSON.stringify( view.questions )
 
 	view.jquery_json = mediaURL( 'jquery-json.js' )
 
