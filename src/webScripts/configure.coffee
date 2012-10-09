@@ -16,6 +16,7 @@ post = ->
 		questions: JSON.parse( quizData.questionsJSON )
 		allowMultipleSubmission: quizData.allowMultipleSubmission
 		isEmbedded: true # this app is embedded in the activity page
+		questionsJSON: null
 
 	try
 		OpenLearning.activity.setTotalMarks questions.length
@@ -43,9 +44,10 @@ get = ->
 
 	if not view.questions?
 		view.questions = []
-	
-	view.questionsJSON = JSON.stringify( view.questions )
 
+	if not view.questionsJSON
+		view.questionsJSON = JSON.stringify( view.questions )
+	
 	return view
 
 
