@@ -14,7 +14,9 @@ if quiz.questionsJSON
 		hasQuizData = true
 	catch error
 	  	hasQuizData = false
-	
+else if not quiz.questions
+	hasQuizData = false
+
 user = 'test'
 if request.user
 	user = request.user
