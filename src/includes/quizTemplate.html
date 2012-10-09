@@ -9,34 +9,37 @@
   <body>
     <form method="post" action="?">
       {{&csrf_token}}
-    <table class="table table-striped">
-      <tbody>
-		{{#questions}}
-      	<tr>
-			<th> {{number}} </th>
-			<td> {{text}} </td>
-			<td>
-				{{#answered}}
-					{{#correct}}
-						<span class="label label-success">Correct</span>
-					{{/correct}}
-				
-					{{^correct}}
-						<span class="label label-important">Incorrect</span>
-					{{/correct}}
-				{{/answered}}
-				
-				{{#answers}}
-					<label class="radio" style="margin-top: 4px">
-						<input type="radio" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#disabled}}disabled="disabled"{{/disabled}}>
-						{{#showAsCorrect}}<b {{#correct}}style="color: #080"{{/correct}}>{{text}}</b>{{/showAsCorrect}}
-						{{^showAsCorrect}}{{text}}{{/showAsCorrect}}
-					</label>
-				{{/answers}}
-			</td>
-		</tr>
-		{{/questions}}
-      </tbody>
+    
+      <table class="table table-striped">
+        <tbody>
+
+{{#questions}}
+  <tr>
+		<th> {{number}} </th>
+		<td width="50%"> {{text}} </td>
+		<td>
+			{{#answered}}
+				{{#correct}}
+					<span class="label label-success">Correct</span>
+				{{/correct}}
+			
+				{{^correct}}
+					<span class="label label-important">Incorrect</span>
+				{{/correct}}
+			{{/answered}}
+			
+			{{#answers}}
+				<label class="radio" style="margin-top: 4px">
+					<input type="radio" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#disabled}}disabled="disabled"{{/disabled}}>
+					{{#showAsCorrect}}<b {{#correct}}style="color: #080"{{/correct}}>{{text}}</b>{{/showAsCorrect}}
+					{{^showAsCorrect}}{{text}}{{/showAsCorrect}}
+				</label>
+			{{/answers}}
+		</td>
+  </tr>
+{{/questions}}
+
+        </tbody>
       <tfoot>
         <tr>
           <td></td>
