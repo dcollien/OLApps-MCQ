@@ -21,7 +21,7 @@
 
 				answers.push( {
 					text: "Answer Text",
-					value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length]
+					value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length%26]
 				} );
 
 				form = buildQuestions( questions );
@@ -88,11 +88,26 @@
 
 			var buildQuestions = function( questions ) {
 				var $questionForm = $('<form class="form-horizontal">');
+
 				var $questionTable = $('<table class="table table-striped">');
 
 				$questionTable.append( $('<tr><th>#</th><th>Question</th><th>Answers</th><th></th></tr>') );
 
 				$(questions).each( function( index, element ) {
+
+					var $questionOptions = $('<select>');
+					$questionOptions.attr( 'name', 'questions[' + index +'][type]' );
+
+					var $optRadio = $('<option value="radio">Radio Buttons</option>');
+					var $optDropdown = $('<option value="dropdown">Dropdown Menu</option>')
+					$questionOptions.append( $optRadio );
+					$questionOptions.append( $optDropdown );
+
+					if (element.type === "dropdown") {
+						$optDropdown.attr( "selected", "selected" );
+					} else {
+						$optRadio.attr( "selected", "selected" );
+					}
 
 					$row = $('<tr>');
 					$questionTable.append( $row );
@@ -140,7 +155,9 @@
 
 					$questionCell.append( $text );
 					$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
-					$answerCell.append( '<br><br>' );
+					$answerCell.append( ' &nbsp; ');
+					$answerCell.append( $questionOptions );
+					$answerCell.append( '<div style="clear:both"></div><br/>' );
 					$answerCell.append( $answers );
 					$answerCell.append( '<br>' );
 					$answerCell.append( $addAnswerButton );
@@ -152,7 +169,6 @@
 				$addQuestionButton.click( addQuestion );
 
 				$questionForm.append( $questionTable ).append( '<hr>' ).append( $('<center>').html( $addQuestionButton ) );
-
 				$('#questions').html( $questionForm );
 
 				return $questionForm;
@@ -164,6 +180,7 @@
 
 				$('#saveButton').click( function( ) {
 					questions = form.toJSON().questions;
+
 					if (!questions) {
 						questions = [];
 					}

@@ -90,6 +90,8 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 			text: questionData.text
 			correct: isCorrect
 			answers: answers
+			isDropdown: questionData.type is "dropdown"
+			isRadio: questionData.type is "radio"
 			
 		questions.push question
 		questionNumber += 1
@@ -115,6 +117,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		doneText: quiz.doneText
 		submissionURL: submissionURL
 		isAnswerChanged: isAnswerChanged
+		completed: (marks == totalQuestions)
 
 	render( template, view )
 	
@@ -139,16 +142,21 @@ if hasQuizData
 		# TODO: markup
 		OpenLearning.activity.saveSubmission user, { markup: markup, metadata: quizData }, 'content'
 
-		
-		taskMarksUpdate = { }
+		updateMarks = true
+		# only update marks if completed, if they can submit lots
+		if quiz.allowMultipleSubmission and not view.completed
+			updateMarks = false
+			
+		if updateMarks
+			taskMarksUpdate = { }
 
-		taskMarksUpdate[request.user] =
-			mark: marks
-			completed: true
-			comment: 'Marked by Quiz Activity'
-		
-		OpenLearning.activity.submit( request.user )
-		OpenLearning.activity.setMarks( taskMarksUpdate )
+			taskMarksUpdate[request.user] =
+				mark: marks
+				completed: true
+				comment: 'Marked by Quiz Activity'
+			
+			OpenLearning.activity.submit( request.user )
+			OpenLearning.activity.setMarks( taskMarksUpdate )
 	else
 		quizData = userData
 		

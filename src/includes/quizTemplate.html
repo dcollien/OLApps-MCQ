@@ -28,6 +28,7 @@
 				{{/correct}}
 			{{/answered}}
 			
+      {{#isRadio}}
 			{{#answers}}
 				<label class="radio" style="margin-top: 4px">
 					<input type="radio" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#disabled}}disabled="disabled"{{/disabled}}>
@@ -35,6 +36,30 @@
 					{{^showAsCorrect}}{{text}}{{/showAsCorrect}}
 				</label>
 			{{/answers}}
+      {{/isRadio}}
+
+      {{#isDropdown}}
+      <div style="margin-top: 4px">
+        <select name="question{{number}}" {{#disabled}}disabled="disabled"{{/disabled}}>
+          {{#answers}}
+          <option value="{{value}}" {{#selected}}selected="selected"{{/selected}}>{{text}}</option>
+          {{/answers}}
+        </select>
+        {{#answers}}
+          {{#showAsCorrect}}
+          {{#correct}}
+          <i class="icon-ok"></i>
+          {{/correct}}
+
+          {{^correct}}
+          <br/><b>{{text}}</b>
+          {{/correct}}
+
+          {{/showAsCorrect}}
+        {{/answers}}
+      </div>
+      {{/isDropdown}}
+
 		</td>
   </tr>
 {{/questions}}
@@ -48,7 +73,13 @@
         </tr>
       </tfoot>
     </table>
-      {{^disabled}}<center><button type="submit" class="btn btn-primary">{{doneText}}</button></center>{{/disabled}}
+      {{#completed}}<center><b style="color: #080; font-size: 16px">Completed!</b></center><br/><br/>{{/completed}}
+      {{^disabled}}
+      <center>
+        {{#completed}}<i>Submit Again:</i><br><br/>{{/completed}}
+        <button type="submit" class="btn btn-primary">{{doneText}}</button>
+      </center>
+      {{/disabled}}
       <!-- {{submissionURL}} -->
     </form>
 
