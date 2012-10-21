@@ -128,7 +128,7 @@ if hasQuizData
 	
 	canSubmit = quiz.allowMultipleSubmission or (not userData)
 	
-	if request.method is 'POST' and canSubmit
+	if request.method is 'POST' and canSubmit and request.data.action == 'saveQuiz'
 		# submission
 		
 		quizData = request.data
