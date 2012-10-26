@@ -60,6 +60,16 @@
       </div>
       {{/isDropdown}}
 
+      {{#isCheckbox}}
+        {{#answers}}
+          <label class="checkbox" style="margin-top: 4px">
+            <input type="checkbox" name="question{{number}}" value="{{value}}" {{#selected}}checked="checked"{{/selected}} {{#disabled}}disabled="disabled"{{/disabled}}>
+              {{#showAsCorrect}}<b {{#correct}}style="color: #080"{{/correct}}>{{text}}</b>{{/showAsCorrect}}
+              {{^showAsCorrect}}{{text}}{{/showAsCorrect}}
+          </label>
+        {{/answers}}
+      {{/isCheckbox}}
+
 		</td>
   </tr>
 {{/questions}}
