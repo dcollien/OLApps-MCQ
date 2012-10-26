@@ -53,4 +53,22 @@
       }
     ]
   }
+  {
+    "text": "Schrödinger's cat is...",
+    "correct": ["alive", "dead"],
+    "answers": [
+      {
+        "text": "alive",
+        "value": "A"
+      },
+      {
+        "text": "dead",
+        "value": "B"
+      },
+      {
+        "text": "a dog",
+        "value": "C"
+      }
+    ]
+  }
 ]
