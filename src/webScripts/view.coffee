@@ -70,7 +70,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		
 		if isAnswered
 			# if this question's been answered, determine if it was answered correctly
-			isCorrect = (selectedAnswers.join() is correctAnswers.join())
+			isCorrect = (selectedAnswers.sort().join() is correctAnswers.sort().join())
 		
 			if isCorrect
 				# woohoo! give a mark
