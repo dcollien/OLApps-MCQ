@@ -55,7 +55,7 @@
   }
   {
     "text": "Schrödinger's cat is...",
-    "correct": ["alive", "dead"],
+    "correct": ["A", "B"],
     "answers": [
       {
         "text": "alive",
