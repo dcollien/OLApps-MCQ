@@ -56,12 +56,8 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 
 		selectedAnswers = userData['question' + questionNumber]
 
-		if selectedAnswers not instanceof Array
-			if selectedAnswers instanceof String
-				selectedAnswers = [selectedAnswers]
-			else
-				# FIXME we shouldn't be getting an Object but convert it anyway
-				selectedAnswers = (selectedAnswers[x] for x of selectedAnswers)
+		if selectedAnswers instanceof String
+			selectedAnswers = [selectedAnswers]
 
 		if questionData.correct instanceof String
 			correctAnswers = [questionData.correct]
