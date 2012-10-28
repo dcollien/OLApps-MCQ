@@ -211,7 +211,7 @@
 					} else if (element.type === "textbox" ) {
 						$correct = $('<span>');
 						$correct.append( $('<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct ) );
-						$correct.append( $('&nbsp; <b>Any of the following are correct:</b>') );
+						$correct.append( $('<b>&nbsp; &nbsp; Any of the following are correct:</b>') );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
 					}
