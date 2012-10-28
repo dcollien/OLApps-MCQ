@@ -123,17 +123,16 @@
 						form = buildQuestions( qns );
 					} );
 
-					var multiAnswer = false;
 					var correctAnswers = [];
 					if (element.correct instanceof Array) {
 						if (element.correct.length > 1) {
-							multiAnswer = true;
+							element.type = "checkbox";
 						}
 						correctAnswers = element.correct;
 						element.correct = element.correct.join();
 					}
 
-					if (multiAnswer || element.type === "checkbox") {
+					if (element.type === "checkbox") {
 						$optCheckbox.attr( "selected", "selected" );
 					} else if (element.type === "dropdown") {
 						$optDropdown.attr( "selected", "selected" );
@@ -162,7 +161,7 @@
 					
 					var $correct;
 
-					if (multiAnswer) {
+					if (element.type = "checkbox") {
 						$correct = $('<input type="text" name="questions[' + index + '][correct]">').val( element.correct );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
@@ -194,7 +193,7 @@
 					$addAnswerButton.click( addAnswer );
 
 					$questionCell.append( $text );
-					if (multiAnswer) {
+					if (element.type = "checkbox") {
 						$answerCell.append( $questionOptions );
 						$answerCell.append( '<br/>');
 						$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
