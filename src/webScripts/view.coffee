@@ -106,7 +106,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 				
 				# this is the data we need to render the answer
 				answer = 
-					text: response.escape(answerData.text).replace('\n', '<br>')
+					text: answerData.text
 					selected: selected
 					showAsCorrect: showAsCorrect
 					value: answerData.value
@@ -116,7 +116,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		# this is the data we need to render a question	
 		question =
 			number: questionNumber
-			text: questionData.text
+			text: response.escape(questionData.text).replace('\n', '<br>')
 			correct: isCorrect
 			answers: answers
 			isDropdown: questionData.type is "dropdown"
