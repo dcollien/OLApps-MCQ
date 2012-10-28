@@ -72,9 +72,11 @@
 
       {{#isTextbox}}
         <input type="text" name="question{{number}}" value="{{textValue}}" {{#disabled}}disabled="disabled"{{/disabled}}>
+        <b {{#correct}}style="color: #080"{{/correct}}>
         {{#answers}}
-          {{#showAsCorrect}}{{text}}<br/>{{/showAsCorrect}}
+          {{#showAsCorrect}}<br/>{{text}}{{/showAsCorrect}}
         {{/answers}}
+        </b>
       {{/isTextbox}}
 
 		</td>
