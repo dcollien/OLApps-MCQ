@@ -209,7 +209,9 @@
 					if (element.type === "checkbox") {
 						$correct = $('<input type="text" name="questions[' + index + '][correct]">').val( element.correct );
 					} else if (element.type === "textbox" ) {
-						$correct = $('<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct );
+						$correct = $('<span>');
+						$correct.append( $('<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct ) );
+						$correct.append( $('<b>Any of the following:</b>') );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
 					}
@@ -269,7 +271,7 @@
 							$typeChooser.append( $imatches );
 
 							$answers.append( $typeChooser );
-							
+
 							$answers.append( $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text ) );
 
 							var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
