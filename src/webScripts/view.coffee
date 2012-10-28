@@ -59,6 +59,8 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 
 		if userData and userData['question' + questionNumber]
 			selectedAnswers = userData['question' + questionNumber]
+		else
+			selectedAnswers = []
 
 
 		if (typeof selectedAnswers is 'string')
