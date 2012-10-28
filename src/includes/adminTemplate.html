@@ -11,17 +11,18 @@
 			var form, questions;
 
 			var addAnswer = function( ) {
+				var answers;
+				var questionIndex = $(this).data( 'questionIndex' );
+
 				questions = form.toJSON().questions;
 				if (!questions) {
 					questions = [];
 				}
-
-				var questionIndex = $(this).data( 'questionIndex' );
-				var answers = questions[questionIndex].answers;
-
-				if (!answers) {
-					answers = [];
+				if (!questions[questionIndex].answers) {
+					questions[questionIndex].answers = [];
 				}
+
+				answers = questions[questionIndex].answers;
 
 				answers.push( {
 					text: "Answer Text",
