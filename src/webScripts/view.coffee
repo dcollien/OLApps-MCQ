@@ -102,7 +102,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 					answers.push
 						text: answerData.text
 						selected: false
-						showAsCorrect: isDisabled # show correct answer(s) if the user can't submit
+						showAsCorrect: isDisabled and quiz.showAnswers # show correct answer(s) if the user can't submit
 						value: answerData.text
 		else
 			answers = []
