@@ -16,13 +16,18 @@
 		Incorrect
 	{{/correct}}
 {{/answered}}
-				
+
+{{#isTextbox}}
+{{textValue}}
+{{/isTextbox}}
+{{^isTextbox}}
 {{#answers}}
 
 {{#showAsCorrect}}* {{#selected}}**Selected:**{{/selected}} {{#correct}}**{{/correct}}{{text}}{{#correct}}**{{/correct}} {{/showAsCorrect}}
 {{^showAsCorrect}}* {{#selected}}**Selected:**{{/selected}} {{text}}{{/showAsCorrect}}
 
 {{/answers}}
+{{/isTextbox}}
 
 {{/questions}}
 
