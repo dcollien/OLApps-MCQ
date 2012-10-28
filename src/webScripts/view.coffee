@@ -84,36 +84,55 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		else
 			correctAnswers = []
 
-
-		if isAnswered
-			# if this question's been answered, determine if it was answered correctly
-			isCorrect = (selectedAnswers.sort().join() is correctAnswers.sort().join())
-		
-			if isCorrect
-				# woohoo! give a mark
-				marks += 1
 		
 		# collate data to render each answer
-		answers = []
-		if questionData.answers
-			for answerData in questionData.answers
-				
-				selected = false
-				showAsCorrect = false
-				if isAnswered
-					# if this quiz has been answered, figure out if this answer was selected 
-					selected = (answerData.value in selectedAnswers)
-					# highlight this if it's the correct answer to the question (and the user can't submit)
-					showAsCorrect = (answerData.value in correctAnswers) and isDisabled
-				
-				# this is the data we need to render the answer
-				answer = 
-					text: answerData.text
-					selected: selected
-					showAsCorrect: showAsCorrect and quiz.showAnswers
-					value: answerData.value
+		if questionData.type is 'textbox'
+			answers = []
+			isCorrect = false
+			if questionData.answers
+				for answerData in questionData.answers
+					if isAnswered
+						userAnswer = selectedAnswers[0]					
 
-				answers.push answer
+						if answerData.type is 'match'
+							isCorrect = isCorrect or (userAnswer.trim() is answerData.text.trim())
+						else if answerData.type is 'imatch'
+							isCorrect = isCorrect or (userAnswer.trim().toLowerCase() is answerData.text.trim().toLowerCase())
+
+					answers.push
+						text: answerData.text
+						selected: false
+						showAsCorrect: isDisabled # show correct answer(s) if the user can't submit
+						value: answerData.text
+		else
+			answers = []
+			if questionData.answers
+				for answerData in questionData.answers
+					
+					selected = false
+					showAsCorrect = false
+					if isAnswered
+						# if this quiz has been answered, figure out if this answer was selected 
+						selected = (answerData.value in selectedAnswers)
+						# highlight this if it's the correct answer to the question (and the user can't submit)
+						showAsCorrect = (answerData.value in correctAnswers) and isDisabled
+					
+					# this is the data we need to render the answer
+					answer = 
+						text: answerData.text
+						selected: selected
+						showAsCorrect: showAsCorrect and quiz.showAnswers
+						value: answerData.value
+
+					answers.push answer
+
+			if isAnswered
+				# if this question's been answered, determine if it was answered correctly
+				isCorrect = (selectedAnswers.sort().join() is correctAnswers.sort().join())
+		
+		if isCorrect
+			# woohoo! give a mark
+			marks += 1
 
 		# this is the data we need to render a question	
 		question =
@@ -124,6 +143,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 			isDropdown: questionData.type is "dropdown"
 			isRadio: questionData.type is "radio"
 			isCheckbox: questionData.type is "checkbox"
+			isTextbox: questionData.type is "textbox"
 			
 		questions.push question
 		questionNumber += 1

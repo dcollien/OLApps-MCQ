@@ -70,6 +70,13 @@
         {{/answers}}
       {{/isCheckbox}}
 
+      {{#isTextbox}}
+        <input type="text" name="question{{number}}" value="{{value}}" {{#disabled}}disabled="disabled"{{/disabled}}>
+        {{#answers}}
+          {{#showAsCorrect}}{{text}}<br/>{{/showAsCorrect}}
+        {{/answers}}
+      {{/isTextbox}}
+
 		</td>
   </tr>
 {{/questions}}
@@ -92,7 +99,7 @@
       {{/disabled}}
       <!-- {{submissionURL}} -->
     </form>
-    
+
     <script type="text/javascript">
       window.app.ready( function() {
         {{#isAnswerChanged}}
