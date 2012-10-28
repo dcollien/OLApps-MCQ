@@ -260,7 +260,10 @@
 							tags: answerValues,
 							tokenSeparators: [",", " "]
 						});
-					} else if (element.type !== "textbox" ) {
+					} else if (element.type === "textbox" ) {
+						$answerCell.append( $questionOptions );
+						$answerCell.append( $correct );
+					} else {
 						$(answerValues).each( function( index, elt ) {
 							var $answerOption = $('<option value="' + elt + '">').text( elt );
 
@@ -272,10 +275,8 @@
 						$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
 						$answerCell.append( ' &nbsp; ');
 						$answerCell.append( $questionOptions );
-					} else {
-						$answerCell.append( $correct );
-					}
-					
+					} 
+
 					$answerCell.append( '<div style="clear:both"></div><br/>' );
 					$answerCell.append( $answers );
 					$answerCell.append( '<br>' );
