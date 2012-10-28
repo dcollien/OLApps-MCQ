@@ -200,6 +200,13 @@
 					var answerValues = [];
 					if (element.type !== "textbox") {
 						// multiple choice
+						if (!element.answers || element.answers.length === 0) {
+							element.answers = [{
+								text: 'Answer Text',
+								value: 'A'
+							}];
+						}
+
 						$(element.answers).each( function( ansIndex, ansElement ) {
 							var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
 
