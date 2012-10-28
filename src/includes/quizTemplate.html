@@ -71,7 +71,7 @@
       {{/isCheckbox}}
 
       {{#isTextbox}}
-        <input type="text" name="question{{number}}" value="{{value}}" {{#disabled}}disabled="disabled"{{/disabled}}>
+        <input type="text" name="question{{number}}" value="{{textValue}}" {{#disabled}}disabled="disabled"{{/disabled}}>
         {{#answers}}
           {{#showAsCorrect}}{{text}}<br/>{{/showAsCorrect}}
         {{/answers}}

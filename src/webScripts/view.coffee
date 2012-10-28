@@ -84,16 +84,16 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		else
 			correctAnswers = []
 
-		
+
+		userAnswer = selectedAnswers[0]
+
 		# collate data to render each answer
 		if questionData.type is 'textbox'
 			answers = []
 			isCorrect = false
 			if questionData.answers
 				for answerData in questionData.answers
-					if isAnswered
-						userAnswer = selectedAnswers[0]					
-
+					if isAnswered and userAnswer
 						if answerData.type is 'match'
 							isCorrect = isCorrect or (userAnswer.trim() is answerData.text.trim())
 						else if answerData.type is 'imatch'
@@ -139,6 +139,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 			number: questionNumber
 			text: response.escape(questionData.text).replace(/\r/g, '').replace(/\n/g, '<br>')
 			correct: isCorrect
+			textValue: userAnswer
 			answers: answers
 			isDropdown: questionData.type is "dropdown"
 			isRadio: questionData.type is "radio"
