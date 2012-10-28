@@ -254,14 +254,22 @@
 						}
 
 						$(element.answers).each( function( ansIndex, ansElement ) {
-							$answers.append( $('<input type="hidden" name="questions[' + index + '][answers][' + ansIndex + '][type]" value="' + ansElement.type + '">') );
+							var $typeChooser = $('<select name="questions[' + index + '][answers][' + ansIndex + '][type]">');
+
+							var $matches = $('<option value="match">Matches</option>');
+							var $imatches = $('<option value="imatch">Matches (ignore case)</option>');
 
 							if (ansElement.type === "match") {
-								$answers.append( $('<span>Matches: </span>' ) );
+								$matches.attr("selected", "selected");
 							} else if (ansElement.type === "imatch") {
-								$answers.append( $('<span>Matches (ignore case): </span>' ) );
+								$imatches.attr("selected", "selected");
 							}
 
+							$typeChooser.append( $matches );
+							$typeChooser.append( $imatches );
+
+							$answers.append( $typeChooser );
+							
 							$answers.append( $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text ) );
 
 							var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
