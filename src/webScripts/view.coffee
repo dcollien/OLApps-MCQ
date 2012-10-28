@@ -116,7 +116,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		# this is the data we need to render a question	
 		question =
 			number: questionNumber
-			text: response.escape(questionData.text).replace('\n', '<br>')
+			text: response.escape(questionData.text).replace(/\r/g, '').replace(/\n/g, '<br>')
 			correct: isCorrect
 			answers: answers
 			isDropdown: questionData.type is "dropdown"
