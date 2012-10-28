@@ -57,21 +57,29 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		if userData and userData['question' + questionNumber]
 			selectedAnswers = userData['question' + questionNumber]
 
+		
 		if selectedAnswers instanceof String
 			selectedAnswers = [selectedAnswers]
 		else if selectedAnswers instanceof Array
 			selectedAnswers = selectedAnswers
+		else if selectedAnswers instanceof Object
+			# FIXME we shouldn't be getting an Object but convert it anyway
+			selectedAnswers = (selectedAnswers[x] for x of selectedAnswers)
 		else
 			selectedAnswers = []
+
 
 		if questionData.correct instanceof String
 			correctAnswers = [questionData.correct]
 		else if questionData.correct instanceof Array
 			correctAnswers = questionData.correct
+		else if questionData.correct instanceof Object
+			# FIXME we shouldn't be getting an Object but convert it anyway
+			correctAnswers = (questionData.correct[x] for x of questionData.correct)
 		else
 			correctAnswers = []
 
-		
+
 		if isAnswered
 			# if this question's been answered, determine if it was answered correctly
 			isCorrect = (selectedAnswers.sort().join() is correctAnswers.sort().join())
