@@ -197,9 +197,9 @@
 					var $answers = $('<div>');
 					var $addAnswerButton;
 
+					var answerValues = [];
 					if (element.type !== "textbox") {
 						// multiple choice
-						var answerValues = [];
 						$(element.answers).each( function( ansIndex, ansElement ) {
 							var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
 
