@@ -196,9 +196,9 @@
 					if (element.type === "checkbox") {
 						$answerCell.append( $questionOptions );
 						$answerCell.append( '<br/>');
-						$answerCell.append( $('<span>Correct: </span>') ).append( $('<div style="display:inline-block;">').html($correct) );
+						$answerCell.append( $('<span style="margin: 6px;">Correct: </span>') ).append( $('<div style="display:inline-block; margin-top: 2px;">').html($correct) );
 						$correct.select2({
-							tags: correctAnswers,
+							tags: answerValues,
 							tokenSeparators: [",", " "]
 						});
 					} else {
