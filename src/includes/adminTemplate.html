@@ -19,6 +19,10 @@
 				var questionIndex = $(this).data( 'questionIndex' );
 				var answers = questions[questionIndex].answers;
 
+				if (!answers) {
+					answers = [];
+				}
+
 				answers.push( {
 					text: "Answer Text",
 					value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length%26]
