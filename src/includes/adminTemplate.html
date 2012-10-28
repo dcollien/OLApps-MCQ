@@ -111,7 +111,11 @@
 					$questionOptions.append( $optRadio );
 					$questionOptions.append( $optDropdown );
 					$questionOptions.append( $optCheckbox );
-
+					$questionOptions.change( function() {
+						questions[index].type = $(this).val();
+						form = buildQuestions( questions );
+					} );
+					
 					var multiAnswer = false;
 					var correctAnswers = [];
 					if (element.correct instanceof Array) {
