@@ -215,7 +215,7 @@
 						}
 
 						$(element.answers).each( function( ansIndex, ansElement ) {
-							$answers.append( $('<input type="hidden" name="questions[' + index + '][answers][' + ansIndex + '][type]" value="' + ansElement.type + '">');
+							$answers.append( $('<input type="hidden" name="questions[' + index + '][answers][' + ansIndex + '][type]" value="' + ansElement.type + '">') );
 
 							if (ansElement.type === "match") {
 								$answers.append( $('<span>Matches: </span>' ) );
