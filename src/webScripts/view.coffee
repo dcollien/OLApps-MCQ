@@ -53,7 +53,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 	for questionData in quiz.questions
 
 		isCorrect = false
-		
+
 		if userData and userData['question' + questionNumber]
 			selectedAnswers = userData['question' + questionNumber]
 		else
@@ -64,8 +64,10 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 
 		if questionData.correct instanceof String
 			correctAnswers = [questionData.correct]
-		else
+		else if questionData.correct instanceof Array
 			correctAnswers = questionData.correct
+		else
+			correctAnswers = []
 
 		if isAnswered
 			# if this question's been answered, determine if it was answered correctly
