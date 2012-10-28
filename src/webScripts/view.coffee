@@ -53,10 +53,20 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 	for questionData in quiz.questions
 
 		isCorrect = false
+
+		selectedAnswers = userData['question' + questionNumber]
+
+		if selectedAnswers instanceof String
+			selectedAnswers = [selectedAnswers]
+
+		if questionData.correct instanceof String
+			correctAnswers = [questionData.correct]
+		else
+			correctAnswers = questionData.correct
 		
 		if isAnswered
 			# if this question's been answered, determine if it was answered correctly
-			isCorrect = (userData['question' + questionNumber] is questionData.correct)
+			isCorrect = (selectedAnswers.sort().join() is correctAnswers.sort().join())
 		
 			if isCorrect
 				# woohoo! give a mark
@@ -71,9 +81,9 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 				showAsCorrect = false
 				if isAnswered
 					# if this quiz has been answered, figure out if this answer was selected 
-					selected = (userData['question' + questionNumber] is answerData.value)
+					selected = (answerData.value in selectedAnswers)
 					# highlight this if it's the correct answer to the question (and the user can't submit)
-					showAsCorrect = (answerData.value is questionData.correct) and isDisabled
+					showAsCorrect = (answerData.value in correctAnswers) and isDisabled
 				
 				# this is the data we need to render the answer
 				answer = 
@@ -92,6 +102,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 			answers: answers
 			isDropdown: questionData.type is "dropdown"
 			isRadio: questionData.type is "radio"
+			isCheckbox: questionData.type is "checkbox"
 			
 		questions.push question
 		questionNumber += 1

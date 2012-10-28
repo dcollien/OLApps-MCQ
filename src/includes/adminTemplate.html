@@ -100,10 +100,20 @@
 
 					var $optRadio = $('<option value="radio">Radio Buttons</option>');
 					var $optDropdown = $('<option value="dropdown">Dropdown Menu</option>')
+					var $optCheckbox = $('<option value="checkbox">Check Boxes</option>')
 					$questionOptions.append( $optRadio );
 					$questionOptions.append( $optDropdown );
+					$questionOptions.append( $optCheckbox );
 
-					if (element.type === "dropdown") {
+					var multiAnswer = false;
+					if (element.correct instanceof Array) {
+						element.correct = element.correct.join();
+						multiAnswer = true;
+					}
+
+					if (multiAnswer || element.type === "checkbox") {
+						$optCheckbox.attr( "selected", "selected" );
+					} else if (element.type === "dropdown") {
 						$optDropdown.attr( "selected", "selected" );
 					} else {
 						$optRadio.attr( "selected", "selected" );
@@ -184,6 +194,11 @@
 					if (!questions) {
 						questions = [];
 					}
+
+					$.each(questions, function(i, question) {
+						question.correct = question.correct.split(',');
+					});
+
 					$('#questionsJSON').val( JSON.stringify( questions ) );
 					$('#configForm').submit();
 					return false;
