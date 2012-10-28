@@ -124,7 +124,7 @@
 					$questionOptions.append( $optTextbox );
 
 					$questionOptions.change( function() {
-						var qns, qnIndex;
+						var qns, qnIndex, newType;
 						// get questions json and current question index
 						qnIndex = $(this).data( 'questionIndex' );
 						qns = form.toJSON().questions;
@@ -132,7 +132,17 @@
 							qns = [];
 						}
 						// change type and rebuild
-						qns[qnIndex].type = $(this).val();
+						newType = $(this).val();
+						
+						if (newType === "textbox" || qns[qnIndex].type === "textbox") {
+							// changing to or from a textbox, wipe answers
+							qns[qnIndex].answers = [];
+						}
+
+						qns[qnIndex].type = newType;
+
+
+
 						form = buildQuestions( qns );
 					} );
 
