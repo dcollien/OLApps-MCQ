@@ -57,8 +57,8 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 		if userData and userData['question' + questionNumber]
 			selectedAnswers = userData['question' + questionNumber]
 
-		
-		if selectedAnswers instanceof String
+
+		if (typeof selectedAnswers is 'string')
 			selectedAnswers = [selectedAnswers]
 		else if selectedAnswers instanceof Array
 			selectedAnswers = selectedAnswers
@@ -69,7 +69,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 			selectedAnswers = []
 
 
-		if questionData.correct instanceof String
+		if (typeof questionData.correct is 'string')
 			correctAnswers = [questionData.correct]
 		else if questionData.correct instanceof Array
 			correctAnswers = questionData.correct
