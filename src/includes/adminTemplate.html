@@ -161,7 +161,7 @@
 					
 					var $correct;
 
-					if (element.type = "checkbox") {
+					if (element.type === "checkbox") {
 						$correct = $('<input type="text" name="questions[' + index + '][correct]">').val( element.correct );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
