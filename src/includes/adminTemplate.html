@@ -223,7 +223,7 @@
 								$answers.append( $('<span>Matches (ignore case): </span>' ) );
 							}
 
-							$answers.append( $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
+							$answers.append( $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text ) );
 
 							var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
 							$delAnswerButton.data( 'questionIndex', index );
