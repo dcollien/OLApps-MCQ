@@ -26,10 +26,17 @@
 
 				answers = questions[questionIndex].answers;
 
-				answers.push( {
-					text: "Answer Text",
-					value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length%26]
-				} );
+				if (questions[questionIndex].type === "textbox") {
+					answers.push( {
+						text: '',
+						type: 'match'
+					} );
+				} else {
+					answers.push( {
+						text: "Answer Text",
+						value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[answers.length%26]
+					} );
+				}
 
 				form = buildQuestions( questions );
 
@@ -107,18 +114,24 @@
 					$questionOptions.data( 'questionIndex', index );
 
 					var $optRadio = $('<option value="radio">Radio Buttons</option>');
-					var $optDropdown = $('<option value="dropdown">Dropdown Menu</option>')
-					var $optCheckbox = $('<option value="checkbox">Check Boxes</option>')
+					var $optDropdown = $('<option value="dropdown">Dropdown Menu</option>');
+					var $optCheckbox = $('<option value="checkbox">Check Boxes</option>');
+					var $optTextbox = $('<option value="textbox">Text Input</option>');
+
 					$questionOptions.append( $optRadio );
 					$questionOptions.append( $optDropdown );
 					$questionOptions.append( $optCheckbox );
+					$questionOptions.append( $optTextbox );
+
 					$questionOptions.change( function() {
 						var qns, qnIndex;
+						// get questions json and current question index
 						qnIndex = $(this).data( 'questionIndex' );
 						qns = form.toJSON().questions;
 						if (!qns) {
 							qns = [];
 						}
+						// change type and rebuild
 						qns[qnIndex].type = $(this).val();
 						form = buildQuestions( qns );
 					} );
@@ -132,7 +145,9 @@
 						element.correct = element.correct.join();
 					}
 
-					if (element.type === "checkbox") {
+					if (element.type === "textbox" ) {
+						$optTextbox.attr( "selected", "selected" );
+					} else if (element.type === "checkbox") {
 						$optCheckbox.attr( "selected", "selected" );
 					} else if (element.type === "dropdown") {
 						$optDropdown.attr( "selected", "selected" );
@@ -168,26 +183,58 @@
 					}
 					
 					var $answers = $('<div>');
-					var answerValues = [];
-					$(element.answers).each( function( ansIndex, ansElement ) {
-						var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
+					var $addAnswerButton;
 
-						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
+					if (element.type !== "textbox") {
+						// multiple choice
+						var answerValues = [];
+						$(element.answers).each( function( ansIndex, ansElement ) {
+							var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
 
-						answerValues.push( ansElement.value );
+							var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
 
-						var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
-						$delAnswerButton.data( 'questionIndex', index );
-						$delAnswerButton.data( 'answerIndex', ansIndex );
-						$delAnswerButton.click( deleteAnswer );
+							answerValues.push( ansElement.value );
 
-						$answers.append( $answerValue );
-						$answers.append( $answerText );
-						$answers.append( $delAnswerButton );
-						$answers.append( '<br>' );
-					} );
+							var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
+							$delAnswerButton.data( 'questionIndex', index );
+							$delAnswerButton.data( 'answerIndex', ansIndex );
+							$delAnswerButton.click( deleteAnswer );
 
-					var $addAnswerButton = $('<a href="#" class="btn addAnswerButton"><i class="icon-plus"></i> Add Answer</a>');
+							$answers.append( $answerValue );
+							$answers.append( $answerText );
+							$answers.append( $delAnswerButton );
+							$answers.append( '<br>' );
+						} );
+					} else {
+						// short answer
+						if (!element.answers || element.answers.length === 0) {
+							element.answers = [{
+								text: '',
+								type: 'match'
+							}];
+						}
+
+						$(element.answers).each( function( ansIndex, ansElement ) {
+							$answers.append( $('<input type="hidden" name="questions[' + index + '][answers][' + ansIndex + '][type]" value="' + ansElement.type + '">');
+
+							if (ansElement.type === "match") {
+								$answers.append( $('<span>Matches: </span>' ) );
+							} else if (ansElement.type === "imatch") {
+								$answers.append( $('<span>Matches (ignore case): </span>' ) );
+							}
+
+							$answers.append( $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
+
+							var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
+							$delAnswerButton.data( 'questionIndex', index );
+							$delAnswerButton.data( 'answerIndex', ansIndex );
+							$delAnswerButton.click( deleteAnswer );
+							$answers.append( $delAnswerButton );
+							$answers.append( '<br>' );
+						} );
+					}
+
+					$addAnswer = $('<a href="#" class="btn addAnswerButton"><i class="icon-plus"></i> Add Answer</a>');
 
 					$addAnswerButton.data( 'questionIndex', index );
 					$addAnswerButton.click( addAnswer );
