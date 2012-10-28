@@ -4,6 +4,7 @@
 		<title>Quiz Admin</title>
 		<link rel="stylesheet" href="/common/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
 		<script src="/common/jquery.min.js"></script>
+		<script src="/common/select2/select2.js"></script>
 		{{&app_init_js}}
 		<script src="{{ jquery_json }}"></script>
 		
@@ -111,10 +112,12 @@
 					$questionOptions.append( $optCheckbox );
 
 					var multiAnswer = false;
+					var correctAnswers = [];
 					if (element.correct instanceof Array) {
 						if (element.correct.length > 1) {
 							multiAnswer = true;
 						}
+						correctAnswers = element.correct;
 						element.correct = element.correct.join();
 					}
 
@@ -145,14 +148,22 @@
 
 					var $text = $('<textarea name="questions[' + index + '][text]" class="box-full" style="height: 100%;">').val( element.text );
 					
-					var $correct = $('<input type="text" name="questions[' + index + '][correct]" class="input-mini">').val( element.correct );
+					var $correct;
+
+					if (multiAnswer) {
+						$correct = $('<input type="text" name="questions[' + index + '][correct]" class="input-mini">').val( element.correct );
+					} else {
+						$correct = $('<select name="questions[' + index + '][correct]">');
+					}
 					
 					var $answers = $('<div>');
-
+					var answerValues = [];
 					$(element.answers).each( function( ansIndex, ansElement ) {
 						var $answerText = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text );
 
 						var $answerValue = $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][value]" class="input-mini">').val( ansElement.value );
+
+						answerValues.push( ansElement.value );
 
 						var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
 						$delAnswerButton.data( 'questionIndex', index );
@@ -171,9 +182,27 @@
 					$addAnswerButton.click( addAnswer );
 
 					$questionCell.append( $text );
-					$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
-					$answerCell.append( ' &nbsp; ');
-					$answerCell.append( $questionOptions );
+					if (multiAnswer) {
+						$answerCell.append( $questionOptions );
+						$answerCell.append( '<br/>');
+						$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
+						$corect.select2({
+							tags: correctAnswers,
+							tokenSeparators: [",", " "]
+						});
+					} else {
+						$(answerValues).each( function( index, elt ) {
+							var $answerOption = $('<option value="' + elt + '">');
+
+							if (elt === element.correct) {
+								$answerOption.attr("selected", "selected");
+							}
+							$correct.append( $answerOption );
+						} );
+						$answerCell.append( $('<span>Correct: </span>') ).append( $correct );
+						$answerCell.append( ' &nbsp; ');
+						$answerCell.append( $questionOptions );
+					}
 					$answerCell.append( '<div style="clear:both"></div><br/>' );
 					$answerCell.append( $answers );
 					$answerCell.append( '<br>' );
