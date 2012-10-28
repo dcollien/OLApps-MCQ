@@ -92,13 +92,14 @@
       {{/disabled}}
       <!-- {{submissionURL}} -->
     </form>
-
-    {{#isAnswerChanged}}
+    
     <script type="text/javascript">
-    	window.app.ready( function() {
-    		window.app.sendMessage( 'updateProgress', {} );
-    	} );
+      window.app.ready( function() {
+        {{#isAnswerChanged}}
+        window.app.sendMessage( 'updateProgress', {} );
+        {{/isAnswerChanged}}
+        window.app.resize();
+      } );
     </script>
-    {{/isAnswerChanged}}
   </body>
 </html>
