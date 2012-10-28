@@ -110,7 +110,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 				answer = 
 					text: answerData.text
 					selected: selected
-					showAsCorrect: showAsCorrect
+					showAsCorrect: showAsCorrect and quiz.showAnswers
 					value: answerData.value
 
 				answers.push answer
