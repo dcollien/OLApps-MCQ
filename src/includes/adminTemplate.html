@@ -189,7 +189,7 @@
 					if (element.type === "checkbox") {
 						$correct = $('<input type="text" name="questions[' + index + '][correct]">').val( element.correct );
 					} else if (element.type === "textbox" ) {
-						$correct = '<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct );
+						$correct = $('<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
 					}
