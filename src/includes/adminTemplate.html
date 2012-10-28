@@ -113,7 +113,7 @@
 					$questionOptions.append( $optDropdown );
 					$questionOptions.append( $optCheckbox );
 					$questionOptions.change( function() {
-						var qns; qnIndex;
+						var qns, qnIndex;
 						qnIndex = $(this).data( 'questionIndex' );
 						qns = form.toJSON().questions;
 						if (!qns) {
@@ -122,7 +122,7 @@
 						qns[qnIndex].type = $(this).val();
 						form = buildQuestions( qns );
 					} );
-					
+
 					var multiAnswer = false;
 					var correctAnswers = [];
 					if (element.correct instanceof Array) {
