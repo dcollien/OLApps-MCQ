@@ -32,6 +32,9 @@ catch error
 if (Object.keys(userData).length is 0)
 	userData = null
 
+isArray = (value) ->
+	Object.prototype.toString.call(value) is '[object Array]'
+
 # function to render and mark a quiz
 renderAndMark = (userData, isAnswerChanged=false) ->
 	isAnswered = false
@@ -60,7 +63,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 
 		if (typeof selectedAnswers is 'string')
 			selectedAnswers = [selectedAnswers]
-		else if selectedAnswers instanceof Array
+		else if isArray(selectedAnswers)
 			selectedAnswers = selectedAnswers
 		else if selectedAnswers instanceof Object
 			# FIXME we shouldn't be getting an Object but convert it anyway
@@ -71,7 +74,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 
 		if (typeof questionData.correct is 'string')
 			correctAnswers = [questionData.correct]
-		else if questionData.correct instanceof Array
+		else if isArray(questionData.correct)
 			correctAnswers = questionData.correct
 		else if questionData.correct instanceof Object
 			# FIXME we shouldn't be getting an Object but convert it anyway
