@@ -54,8 +54,11 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 
 		isCorrect = false
 
-		selectedAnswers = userData['question' + questionNumber]
-
+		if userData
+			selectedAnswers = userData['question' + questionNumber]
+		else
+			selectedAnswers = []
+		
 		if selectedAnswers instanceof String
 			selectedAnswers = [selectedAnswers]
 
