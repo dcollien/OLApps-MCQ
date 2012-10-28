@@ -211,7 +211,7 @@
 					} else if (element.type === "textbox" ) {
 						$correct = $('<span>');
 						$correct.append( $('<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct ) );
-						$correct.append( $('<b>Any of the following:</b>') );
+						$correct.append( $('<br/><b>Any of the following:</b>') );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
 					}
@@ -271,7 +271,7 @@
 							$typeChooser.append( $imatches );
 
 							$answers.append( $typeChooser );
-
+							$answers.append( '&nbsp; ' );
 							$answers.append( $('<input type="text" name="questions[' + index + '][answers][' + ansIndex + '][text]" class="input-xlarge">').val( ansElement.text ) );
 
 							var $delAnswerButton = $('<a href="#" class="delAnswerButton">&times;</a>');
