@@ -123,28 +123,48 @@
 					$questionOptions.append( $optCheckbox );
 					$questionOptions.append( $optTextbox );
 
-					$questionOptions.change( function() {
-						var qns, qnIndex, newType;
-						// get questions json and current question index
-						qnIndex = $(this).data( 'questionIndex' );
-						qns = form.toJSON().questions;
-						if (!qns) {
-							qns = [];
-						}
-						// change type and rebuild
-						newType = $(this).val();
-						
-						if (newType === "textbox" || qns[qnIndex].type === "textbox") {
-							// changing to or from a textbox, wipe answers
+					if (element.type === "textbox") {
+						$questionOptions.change( function() {
+							var qns, qnIndex, newType;
+							// get questions json and current question index
+							qnIndex = $(this).data( 'questionIndex' );
+							qns = form.toJSON().questions;
+							if (!qns) {
+								qns = [];
+							}
+							// change type and rebuild
+							newType = $(this).val();
+							
+							// changing from a textbox, wipe answers
 							qns[qnIndex].answers = [];
-						}
 
-						qns[qnIndex].type = newType;
+							qns[qnIndex].type = newType;
 
+							form = buildQuestions( qns );
+						} );
+					} else {
+						$questionOptions.change( function() {
+							var qns, qnIndex, newType;
+							// get questions json and current question index
+							qnIndex = $(this).data( 'questionIndex' );
+							qns = form.toJSON().questions;
+							if (!qns) {
+								qns = [];
+							}
+							// change type and rebuild
+							newType = $(this).val();
+							
+							if (newType === "textbox") {
+								// changing to a textbox, wipe answers
+								qns[qnIndex].answers = [];
+							}
 
+							qns[qnIndex].type = newType;
 
-						form = buildQuestions( qns );
-					} );
+							form = buildQuestions( qns );
+						} );
+					}
+					
 
 					var correctAnswers = [];
 					if (element.correct instanceof Array) {
