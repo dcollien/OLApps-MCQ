@@ -107,8 +107,10 @@
 
 					var multiAnswer = false;
 					if (element.correct instanceof Array) {
+						if (element.correct.length > 1) {
+							multiAnswer = true;
+						}
 						element.correct = element.correct.join();
-						multiAnswer = true;
 					}
 
 					if (multiAnswer || element.type === "checkbox") {
