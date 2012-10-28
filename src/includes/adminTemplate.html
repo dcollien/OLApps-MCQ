@@ -115,7 +115,7 @@
 						questions[index].type = $(this).val();
 						form = buildQuestions( questions );
 					} );
-					
+
 					var multiAnswer = false;
 					var correctAnswers = [];
 					if (element.correct instanceof Array) {
@@ -156,7 +156,7 @@
 					var $correct;
 
 					if (multiAnswer) {
-						$correct = $('<input type="text" name="questions[' + index + '][correct]" class="input-mini">').val( element.correct );
+						$correct = $('<input type="text" name="questions[' + index + '][correct]">').val( element.correct );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
 					}
@@ -197,7 +197,7 @@
 						});
 					} else {
 						$(answerValues).each( function( index, elt ) {
-							var $answerOption = $('<option value="' + elt + '">');
+							var $answerOption = $('<option value="' + elt + '">').text( elt );
 
 							if (elt === element.correct) {
 								$answerOption.attr("selected", "selected");
