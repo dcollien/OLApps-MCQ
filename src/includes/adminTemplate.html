@@ -211,7 +211,7 @@
 					} else if (element.type === "textbox" ) {
 						$correct = $('<span>');
 						$correct.append( $('<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct ) );
-						$correct.append( $('<br/><b>Any of the following:</b>') );
+						$correct.append( $('&nbsp; <b>Any of the following are correct:</b>') );
 					} else {
 						$correct = $('<select name="questions[' + index + '][correct]">');
 					}
@@ -258,7 +258,7 @@
 						$(element.answers).each( function( ansIndex, ansElement ) {
 							var $typeChooser = $('<select name="questions[' + index + '][answers][' + ansIndex + '][type]">');
 
-							var $matches = $('<option value="match">Matches</option>');
+							var $matches = $('<option value="match">Matches Exactly</option>');
 							var $imatches = $('<option value="imatch">Matches (ignore case)</option>');
 
 							if (ansElement.type === "match") {
