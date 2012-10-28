@@ -104,6 +104,7 @@
 
 					var $questionOptions = $('<select>');
 					$questionOptions.attr( 'name', 'questions[' + index +'][type]' );
+					$questionOptions.data( 'questionIndex' );
 
 					var $optRadio = $('<option value="radio">Radio Buttons</option>');
 					var $optDropdown = $('<option value="dropdown">Dropdown Menu</option>')
@@ -112,15 +113,16 @@
 					$questionOptions.append( $optDropdown );
 					$questionOptions.append( $optCheckbox );
 					$questionOptions.change( function() {
-						var qns;
+						var qns; qnIndex;
+						qnIndex = $(this).data( 'questionIndex' );
 						qns = form.toJSON().questions;
 						if (!qns) {
 							qns = [];
 						}
-						qns[index].type = $(this).val();
+						qns[qnIndex].type = $(this).val();
 						form = buildQuestions( qns );
 					} );
-
+					
 					var multiAnswer = false;
 					var correctAnswers = [];
 					if (element.correct instanceof Array) {
