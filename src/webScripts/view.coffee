@@ -106,7 +106,7 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 				
 				# this is the data we need to render the answer
 				answer = 
-					text: answerData.text
+					text: response.escape(answerData.text).replace('\n', '<br>')
 					selected: selected
 					showAsCorrect: showAsCorrect
 					value: answerData.value
