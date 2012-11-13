@@ -29,7 +29,7 @@ try
 catch error
 	userData = null
 
-if (Object.keys(userData).length is 0)
+if not userData? or (Object.keys(userData).length is 0)
 	userData = null
 
 isArray = (value) ->
