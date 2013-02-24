@@ -101,9 +101,9 @@
 			};
 
 			var buildQuestions = function( questions ) {
-				var $questionForm = $('<form class="form-horizontal">');
+				var $questionForm = $('<form class="form-horizontal"></form>');
 
-				var $questionTable = $('<table class="table table-striped">');
+				var $questionTable = $('<table class="table table-striped"></table>');
 
 				$questionTable.append( $('<tr><th>#</th><th>Question</th><th>Answers</th><th></th></tr>') );
 
@@ -188,8 +188,8 @@
 					$row = $('<tr>');
 					$questionTable.append( $row );
 					
-					$numberCell = $('<td style="font-weight: bold">').text( (index+1) );
-					$questionCell = $('<td style="text-align: top;">');
+					$numberCell = $('<td style="font-weight: bold"></td>').text( (index+1) );
+					$questionCell = $('<td style="text-align: top;"></td>');
 					$answerCell = $('<td>');
 					$deleteCell = $('<td>');
 
@@ -202,7 +202,7 @@
 
 					$deleteCell.append( $deleteQuestionButton );
 
-					var $text = $('<textarea name="questions[' + index + '][text]" class="box-full" style="height: 100%;">').val( element.text );
+					var $text = $('<textarea name="questions[' + index + '][text]" class="box-full" style="height: 100%;"></textarea>').val( element.text );
 					
 					var $correct;
 
@@ -213,7 +213,7 @@
 						$correct.append( $('<input type="hidden" name="questions[' + index + '][correct]">').val( element.correct ) );
 						$correct.append( $('<b>&nbsp; &nbsp; Any of the following are correct:</b>') );
 					} else {
-						$correct = $('<select name="questions[' + index + '][correct]">');
+						$correct = $('<select name="questions[' + index + '][correct]"></select>');
 					}
 					
 					var $answers = $('<div>');
@@ -256,7 +256,7 @@
 						}
 
 						$(element.answers).each( function( ansIndex, ansElement ) {
-							var $typeChooser = $('<select name="questions[' + index + '][answers][' + ansIndex + '][type]">');
+							var $typeChooser = $('<select name="questions[' + index + '][answers][' + ansIndex + '][type]"></select>');
 
 							var $matches = $('<option value="match">Matches Exactly</option>');
 							var $imatches = $('<option value="imatch">Matches (ignore case)</option>');
@@ -292,7 +292,7 @@
 					if (element.type === "checkbox") {
 						$answerCell.append( $questionOptions );
 						$answerCell.append( '<br/>');
-						$answerCell.append( $('<span style="margin-top: 8px; margin-right: 4px;">Correct: </span>') ).append( $('<div style="display:inline-block; margin-top: 4px;">').html($correct) );
+						$answerCell.append( $('<span style="margin-top: 8px; margin-right: 4px;">Correct: </span>') ).append( $('<div style="display:inline-block; margin-top: 4px;"></div>').html($correct) );
 						$correct.select2({
 							tags: answerValues,
 							tokenSeparators: [",", " "]
@@ -302,7 +302,7 @@
 						$answerCell.append( $correct );
 					} else {
 						$(answerValues).each( function( index, elt ) {
-							var $answerOption = $('<option value="' + elt + '">').text( elt );
+							var $answerOption = $('<option value="' + elt + '"></option>').text( elt );
 
 							if (elt === element.correct) {
 								$answerOption.attr("selected", "selected");
