@@ -260,15 +260,25 @@
 
 							var $matches = $('<option value="match">Matches Exactly</option>');
 							var $imatches = $('<option value="imatch">Matches (ignore case)</option>');
+							var $startswith = $('<option value="startswith">Starts with</option>');
+							var $endswith = $('<option value="endswith">Ends with</option>');
+							var $notempty = $('<option value="notempty">Something has been entered</option>');
 
 							if (ansElement.type === "match") {
 								$matches.attr("selected", "selected");
 							} else if (ansElement.type === "imatch") {
 								$imatches.attr("selected", "selected");
+							} else if (ansElement.type === 'startswith') {
+								$startswith.attr("selected", "selected");
+							} else if (ansElement.type === 'endswith') {
+								$endswith.attr("selected", "selected");
+							} else if (ansElement.type === "notempty") {
+								$notempty.attr("selected", "selected");
 							}
-
+							
 							$typeChooser.append( $matches );
 							$typeChooser.append( $imatches );
+							$typeChooser.append( $notempty );
 
 							$answers.append( $typeChooser );
 							$answers.append( '&nbsp; ' );

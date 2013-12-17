@@ -98,6 +98,15 @@ renderAndMark = (userData, isAnswerChanged=false) ->
 							isCorrect = isCorrect or (userAnswer.trim() is answerData.text.trim())
 						else if answerData.type is 'imatch'
 							isCorrect = isCorrect or (userAnswer.trim().toLowerCase() is answerData.text.trim().toLowerCase())
+						else if answerData.type is 'startswith'
+							prefix = answerData.text.trim()
+							isCorrect = isCorrect or (userAnswer.trim()[0...prefix.length] is prefix)
+						else if answerData.type is 'endswith'
+							suffix = answerData.text.trim()
+							answer = userAnswer.trim()
+							isCorrect = isCorrect or (answer[(answer.length - suffix.length)...] is suffix)
+						else if answerData.type is 'notempty'
+							isCorrect = isCorrect or (userAnswer.trim().length > 0)
 
 					answers.push
 						text: answerData.text
