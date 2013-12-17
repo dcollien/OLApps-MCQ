@@ -8,7 +8,7 @@
 		<script src="/common/select2/select2.js"></script>
 		{{&app_init_js}}
 		<script src="{{ jquery_json }}"></script>
-		
+		<script type="application/json" id="questionsJSON">{{&questionsJSON}}</script>
 		<script>
 			var form, questions;
 
@@ -342,7 +342,11 @@
 			};
 
 			$(document).ready( function( ) {
-				questions = {{&questionsJSON}};
+				try {
+					questions = JSON.parse($('#questionsJSON').html());
+				} catch (e) {
+					questions = [];
+				}
 				form = buildQuestions( questions );
 
 				$('#saveButton').click( function( ) {

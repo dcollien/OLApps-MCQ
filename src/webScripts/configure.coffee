@@ -55,6 +55,9 @@ checkPermission 'write', accessDeniedTemplate, ->
 		view = get()
 	
 	if not view.questionsJSON
+		if not view.questions
+			view.questions = []
+		
 		view.questionsJSON = JSON.stringify( view.questions )
 
 	view.jquery_json = mediaURL( 'jquery-json.js' )
